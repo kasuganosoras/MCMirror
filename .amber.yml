@@ -1,4 +1,0 @@
-type: app
-database: sqlite
-language: ecr
-model: granite
