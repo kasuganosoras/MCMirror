@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+    {% for category,applications in sortedApplications %}
+        {% include 'parts/application.html.twig' with {'applications': applications, 'category': category} only %}
+    {% endfor %}
+    <div class="column is-4">
+        <p><span class="tag is-info">External</span> - Outgoing link to an external download location.</p>
+    </div>
+    <div class="column is-4">
+        <p><span class="tag is-danger">Abandoned</span> - Project was abandoned by its developers.</p>
+    </div>
+    <div class="column is-4">
+        <p><span class="tag is-success"><i class="fas fa-star"></i></span> - Recommended.</p>
+    </div>
+{% endblock %}
