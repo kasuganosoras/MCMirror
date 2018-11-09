@@ -6,7 +6,7 @@
             {% if application.isExternal %}
                 {% set url = application.getUrl %}
             {% else %}
-                {% set url = url('application_overview', {'application': application.name}) %}
+                {% set url = url('application_overview', {'applicationName': application.name}) %}
             {% endif %}
 
             <a class="panel-block" href="{{ url }}">{{ application.name }}

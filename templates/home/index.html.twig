@@ -2,7 +2,7 @@
 
 {% block content %}
     {% for category,applications in sortedApplications %}
-        {% include 'parts/application.html.twig' with {'applications': applications, 'category': category} only %}
+        {% include 'home/parts/application.html.twig' with {'applications': applications, 'category': category} only %}
     {% endfor %}
     <div class="column is-4">
         <p><span class="tag is-info">External</span> - Outgoing link to an external download location.</p>

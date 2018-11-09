@@ -37,4 +37,9 @@ class Bukkit implements ApplicationInterface
     {
         return 'Other';
     }
+
+    public function getOfficialLinks(): array
+    {
+        return [];
+    }
 }

@@ -32,6 +32,16 @@ class ApplicationService
         return $this->applications;
     }
 
+    public function getApplication(string $applicationName) {
+        foreach ($this->applications as $application) {
+            if ($application->getName() === $applicationName) {
+                return $application;
+            }
+        }
+
+        return null;
+    }
+
     public function getApplicationOrderedByCategory()
     {
         $orderedApplications = [];

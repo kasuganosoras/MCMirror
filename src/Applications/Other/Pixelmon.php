@@ -37,4 +37,9 @@ class Pixelmon implements ApplicationInterface
     {
         return 'Other';
     }
+
+    public function getOfficialLinks(): array
+    {
+        return [];
+    }
 }

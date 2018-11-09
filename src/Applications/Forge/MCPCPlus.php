@@ -37,4 +37,9 @@ class MCPCPlus implements ApplicationInterface
     {
         return 'Forge';
     }
+
+    public function getOfficialLinks(): array
+    {
+        return [];
+    }
 }

@@ -37,4 +37,9 @@ class MiNet implements ApplicationInterface
     {
         return 'Pocket Edition';
     }
+
+    public function getOfficialLinks(): array
+    {
+        return [];
+    }
 }

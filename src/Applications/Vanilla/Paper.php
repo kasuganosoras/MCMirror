@@ -37,4 +37,14 @@ class Paper implements ApplicationInterface
     {
         return 'Vanilla';
     }
+
+    public function getOfficialLinks(): array
+    {
+        return [
+            'Downloads' => 'https://papermc.io/downloads',
+            'Documentation' => 'https://paper.readthedocs.io/',
+            'JavaDocs' => 'https://papermc.io/javadocs/',
+            'GitHub' => 'https://github.com/PaperMC/Paper',
+        ];
+    }
 }

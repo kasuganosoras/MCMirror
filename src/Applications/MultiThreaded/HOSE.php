@@ -37,4 +37,9 @@ class HOSE implements ApplicationInterface
     {
         return 'Multi-Threaded';
     }
+
+    public function getOfficialLinks(): array
+    {
+        return [];
+    }
 }

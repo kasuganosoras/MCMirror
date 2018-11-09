@@ -38,4 +38,9 @@ class Spigot implements ApplicationInterface
     {
         return 'Vanilla';
     }
+
+    public function getOfficialLinks(): array
+    {
+        return [];
+    }
 }

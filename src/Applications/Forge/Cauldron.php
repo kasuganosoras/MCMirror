@@ -36,4 +36,9 @@ class Cauldron implements ApplicationInterface
     {
         return 'Forge';
     }
+
+    public function getOfficialLinks(): array
+    {
+        return [];
+    }
 }

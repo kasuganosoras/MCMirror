@@ -19,4 +19,6 @@ interface ApplicationInterface
 
     public function getCategory(): string;
 
+    public function getOfficialLinks(): array;
+
 }

@@ -37,4 +37,9 @@ class Lilypad implements ApplicationInterface
     {
         return 'Proxies';
     }
+
+    public function getOfficialLinks(): array
+    {
+        return [];
+    }
 }

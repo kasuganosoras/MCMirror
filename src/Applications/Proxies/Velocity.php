@@ -37,4 +37,9 @@ class Velocity implements ApplicationInterface
     {
         return 'Proxies';
     }
+
+    public function getOfficialLinks(): array
+    {
+        return [];
+    }
 }

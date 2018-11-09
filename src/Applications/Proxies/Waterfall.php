@@ -37,4 +37,9 @@ class Waterfall implements ApplicationInterface
     {
         return 'Proxies';
     }
+
+    public function getOfficialLinks(): array
+    {
+        return [];
+    }
 }

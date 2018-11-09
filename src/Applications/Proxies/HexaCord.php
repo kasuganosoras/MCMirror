@@ -37,4 +37,9 @@ class HexaCord implements ApplicationInterface
     {
         return 'Proxies';
     }
+
+    public function getOfficialLinks(): array
+    {
+        return [];
+    }
 }
