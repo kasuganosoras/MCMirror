@@ -1,11 +1,11 @@
 <!doctype html>
 <html>
 <head>
-    <title>MC Mirror | {{ title }}</title>
+    <title>{{ env('WEBSITE_NAME') }} | {{ title }}</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta property="og:site_name" content="Yive's Mirror" />
+    <meta property="og:site_name" content="{{ env('WEBSITE_NAME') }}" />
     <meta property="og:title" content="{{ title }}" />
     <meta property="og:url" content="{{ app.request.uri }}" />
     <meta property="og:type" content="website" />
@@ -36,7 +36,7 @@
 <section class="hero is-info is-medium" style="background-repeat: no-repeat;background-size: cover;background: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(/dist/header.jpg);background-position: center;">
     <div class="hero-body">
         <div class="container has-text-centered">
-            <h1 class="title is-2">MC Mirror</h1>
+            <h1 class="title is-2">{{ env('WEBSITE_NAME') }}</h1>
             <h2 class="subtitle">continuation of Yives Mirror</h2>
             <h2 class="subtitle">Minecraft Server Software File Mirror</h2>
         </div>

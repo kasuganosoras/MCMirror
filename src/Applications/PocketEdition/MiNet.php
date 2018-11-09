@@ -1,10 +1,12 @@
 <?php
 
 
-namespace App\Applications;
+namespace App\Applications\PocketEdition;
+
+use App\Applications\ApplicationInterface;
 
 
-class Paper implements ApplicationInterface
+class MiNet implements ApplicationInterface
 {
     public function isRecommended(): bool
     {
@@ -18,21 +20,21 @@ class Paper implements ApplicationInterface
 
     public function isExternal(): bool
     {
-        return false;
+        return true;
     }
 
     public function getUrl(): ?string
     {
-        return null;
+        return 'https://ci.appveyor.com/project/NiclasOlofsson/MiNET/branch/master/artifacts';
     }
 
     public function getName(): string
     {
-        return 'Paper';
+        return 'BungeeCord';
     }
 
     public function getCategory(): string
     {
-        return 'Vanilla';
+        return 'Pocket Edition';
     }
 }

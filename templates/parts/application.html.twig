@@ -10,17 +10,21 @@
             {% endif %}
 
             <a class="panel-block" href="{{ url }}">{{ application.name }}
-                {% if application.isRecommended %}
-                    <span class="tag is-success is-pulled-right"><i class="fas fa-star"></i></span>
-                {% endif %}
+                <span class="is-pulled-right">
 
-                {% if application.isAbandoned %}
-                    <span class="tag is-danger is-pulled-right">Abandoned</span>
-                {% endif %}
+                    {% if application.isRecommended %}
+                        <span class="tag is-success "><i class="fas fa-star"></i></span>
+                    {% endif %}
 
-                {% if application.isExternal %}
-                    <span class="tag is-info is-pulled-right">External</span>
-                {% endif %}
+                    {% if application.isAbandoned %}
+                        <span class="tag is-danger">Abandoned</span>
+                    {% endif %}
+
+                    {% if application.isExternal %}
+                        <span class="tag is-info">External</span>
+                    {% endif %}
+
+                </span>
             </a>
         {% endfor %}
     </nav>

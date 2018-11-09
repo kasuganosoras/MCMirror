@@ -1,15 +1,16 @@
 <?php
 
 
-namespace App\Applications;
+namespace App\Applications\Forge;
+
+use App\Applications\ApplicationInterface;
 
 
-class Spigot implements ApplicationInterface
+class SpongeForge implements ApplicationInterface
 {
-
     public function isRecommended(): bool
     {
-        return false;
+        return true;
     }
 
     public function isAbandoned(): bool
@@ -19,21 +20,21 @@ class Spigot implements ApplicationInterface
 
     public function isExternal(): bool
     {
-        return false;
+        return true;
     }
 
     public function getUrl(): ?string
     {
-        return null;
+        return 'https://www.spongepowered.org/downloads/spongeforge';
     }
 
     public function getName(): string
     {
-        return 'Spigot';
+        return 'Sponge Forge';
     }
 
     public function getCategory(): string
     {
-        return 'Vanilla';
+        return 'Forge';
     }
 }
