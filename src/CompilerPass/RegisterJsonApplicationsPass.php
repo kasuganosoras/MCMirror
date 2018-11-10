@@ -4,8 +4,7 @@
 namespace App\CompilerPass;
 
 
-use App\Service\JsonApplicationService;
-use App\Structs\JsonApplication;
+use App\Application\JsonApplication;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Finder\Finder;

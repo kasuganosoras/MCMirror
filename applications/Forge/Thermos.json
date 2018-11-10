@@ -1,0 +1,13 @@
+{
+    "recommended": true,
+    "abandoned": true,
+    "external": false,
+    "url": null,
+    "name": "Thermos",
+    "category": "Forge",
+    "officialLinks": [],
+    "versionRegex": [
+        "\/[a-zA-Z]+-([0-9.]+).*\/",
+        "\/.*(latest).*\/"
+    ]
+}

@@ -33,8 +33,6 @@ class SetTemplateApplicationVarSubscriber implements EventSubscriberInterface
 
     public function onKernelRequest()
     {
-        VarDumper::dump($this->applicationService->getApplications());
-
         $this->environment->addGlobal('sortedApplications', $this->applicationService->getApplicationOrderedByCategory());
         $this->environment->addGlobal('allApplications', $this->applicationService->getApplications());
     }

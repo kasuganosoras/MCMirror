@@ -1,8 +1,6 @@
 <?php
 
-namespace App\Structs;
-
-use App\Application\ApplicationInterface;
+namespace App\Application;
 
 class JsonApplication implements ApplicationInterface
 {

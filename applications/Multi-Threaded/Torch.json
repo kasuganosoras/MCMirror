@@ -1,0 +1,13 @@
+{
+    "recommended": false,
+    "abandoned": true,
+    "external": false,
+    "url": null,
+    "name": "Torch",
+    "category": "Multi-Threaded",
+    "officialLinks": [],
+    "versionRegex": [
+        "\/[a-zA-Z]+-([0-9.]+).*\/",
+        "\/.*(latest).*\/"
+    ]
+}
