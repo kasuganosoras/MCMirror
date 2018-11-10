@@ -2,7 +2,7 @@
 
 namespace App\Service;
 
-use App\Applications\ApplicationInterface;
+use App\Application\ApplicationInterface;
 
 class ApplicationService
 {
