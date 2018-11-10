@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Service\ApplicationService;
+use App\Service\BuildsService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -13,14 +14,20 @@ class GrabController extends AbstractController
      * @var ApplicationService
      */
     private $applicationService;
+    /**
+     * @var BuildsService
+     */
+    private $buildsService;
 
     /**
      * DownloadsController constructor.
      * @param ApplicationService $applicationService
+     * @param BuildsService $buildsService
      */
-    public function __construct(ApplicationService $applicationService)
+    public function __construct(ApplicationService $applicationService, BuildsService $buildsService)
     {
         $this->applicationService = $applicationService;
+        $this->buildsService = $buildsService;
     }
 
     /**
@@ -37,7 +44,7 @@ class GrabController extends AbstractController
             throw $this->createNotFoundException(sprintf('Could not find Application %s', $applicationName));
         }
 
-        if (false) {//TODO: Not found file
+        if (!$this->buildsService->doesBuildExist($application, $fileName)) {
             throw $this->createNotFoundException(sprintf('Could not find File %s for Application %s', $fileName, $applicationName));
         }
 

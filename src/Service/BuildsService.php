@@ -5,6 +5,7 @@ namespace App\Service;
 use App\Applications\ApplicationInterface;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Routing\RouterInterface;
+use Symfony\Component\VarDumper\VarDumper;
 
 class BuildsService
 {
@@ -15,6 +16,7 @@ class BuildsService
 
     /**
      * BuildsService constructor.
+     * @param RouterInterface $router
      */
     public function __construct(RouterInterface $router)
     {
@@ -23,8 +25,7 @@ class BuildsService
 
     public function getBuildsForApplication(ApplicationInterface $application)
     {
-        $basePath = getenv('DATA_PATH');
-        $applicationPath = $basePath . DIRECTORY_SEPARATOR . $application->getName();
+        $applicationPath = $this->getPathForApplication($application);
 
         $finder = new Finder();
         $finder->files()->in($applicationPath);
@@ -46,5 +47,27 @@ class BuildsService
         }
 
         return $builds;
+    }
+
+    public function getPathForBuild(ApplicationInterface $application, string $fileName): string
+    {
+        return $this->getPathForApplication($application) . DIRECTORY_SEPARATOR . $fileName;
+    }
+
+
+    public function getPathForApplication(ApplicationInterface $application): string
+    {
+        return getenv('DATA_PATH') . DIRECTORY_SEPARATOR . $application->getName();
+    }
+
+
+    public function doesBuildExist(ApplicationInterface $application, string $fileName): bool
+    {
+        $applicationPath = $this->getPathForApplication($application);
+
+        $finder = new Finder();
+        $finder->files()->in($applicationPath)->name($fileName);
+
+        return $finder->count() === 1;
     }
 }

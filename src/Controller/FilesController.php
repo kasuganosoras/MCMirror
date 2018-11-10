@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Service\ApplicationService;
+use App\Service\BuildsService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -12,14 +13,20 @@ class FilesController extends AbstractController
      * @var ApplicationService
      */
     private $applicationService;
+    /**
+     * @var BuildsService
+     */
+    private $buildsService;
 
     /**
      * FilesController constructor.
      * @param ApplicationService $applicationService
+     * @param BuildsService $buildsService
      */
-    public function __construct(ApplicationService $applicationService)
+    public function __construct(ApplicationService $applicationService, BuildsService $buildsService)
     {
         $this->applicationService = $applicationService;
+        $this->buildsService = $buildsService;
     }
 
 
@@ -37,10 +44,10 @@ class FilesController extends AbstractController
             throw $this->createNotFoundException(sprintf('Could not find Application %s', $applicationName));
         }
 
-        $basePath = getenv('DATA_PATH');
-        $applicationPath = $basePath . DIRECTORY_SEPARATOR . $application->getName();
-        $buildPath = $applicationPath . DIRECTORY_SEPARATOR . $fileName;
+        if (!$this->buildsService->doesBuildExist($application, $fileName)) {
+            throw $this->createNotFoundException(sprintf('Could not find File %s for Application %s', $fileName, $applicationName));
+        }
 
-        return $this->file($buildPath);
+        return $this->file($this->buildsService->getPathForBuild($application, $fileName));
     }
 }
