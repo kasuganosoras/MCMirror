@@ -5,6 +5,7 @@
     "php": "^7.1.3",
     "ext-ctype": "*",
     "ext-iconv": "*",
+    "ext-json": "*",
     "sensio/framework-extra-bundle": "^5.2",
     "symfony/asset": "*",
     "symfony/console": "*",
@@ -13,10 +14,10 @@
     "symfony/framework-bundle": "*",
     "symfony/maker-bundle": "^1.9",
     "symfony/profiler-pack": "^1.0",
+    "symfony/translation": "*",
     "symfony/twig-bundle": "*",
     "symfony/web-server-bundle": "*",
-    "symfony/yaml": "*",
-    "ext-json": "*"
+    "symfony/yaml": "*"
   },
   "require-dev": {
     "friendsofphp/php-cs-fixer": "^2.13",
