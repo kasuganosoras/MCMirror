@@ -9,24 +9,12 @@ use Symfony\Component\Routing\Annotation\Route;
 class HomeController extends AbstractController
 {
     /**
-     * @var ApplicationService
-     */
-    private $applicationService;
-
-    public function __construct(ApplicationService $applicationService)
-    {
-        $this->applicationService = $applicationService;
-    }
-
-
-    /**
      * @Route("/", name="index")
      */
     public function index()
     {
         return $this->render('home/index.html.twig', [
             'title' => 'Home',
-            'sortedApplications' => $this->applicationService->getApplicationOrderedByCategory()
         ]);
     }
 }

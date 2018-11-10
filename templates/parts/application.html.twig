@@ -1,0 +1,27 @@
+<p class="panel-heading">{{ category }}</p>
+{% for application in applications %}
+
+    {% if application.isExternal %}
+        {% set url = application.getUrl %}
+    {% else %}
+        {% set url = url('application_overview', {'applicationName': application.name}) %}
+    {% endif %}
+
+    <a class="panel-block" href="{{ url }}">{{ application.name }}
+        <span class="is-pulled-right">
+
+                    {% if application.isRecommended %}
+                        <span class="tag is-success "><i class="fas fa-star"></i></span>
+                    {% endif %}
+
+            {% if application.isAbandoned %}
+                <span class="tag is-danger">Abandoned</span>
+            {% endif %}
+
+            {% if application.isExternal %}
+                <span class="tag is-info">External</span>
+            {% endif %}
+
+                </span>
+    </a>
+{% endfor %}

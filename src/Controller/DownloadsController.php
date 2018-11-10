@@ -54,35 +54,14 @@ class DownloadsController extends AbstractController
                 'date' => '1.1.1970',
                 'downloadUrl' => '#'
 
-            ],            [
-                'fileName' => 'bla.jar',
-                'version' => '1.13.2',
-                'size' => '1337',
-                'date' => '1.1.1970',
-                'downloadUrl' => '#'
-
-            ],            [
-                'fileName' => 'bla.jar',
-                'version' => '1.13.2',
-                'size' => '1337',
-                'date' => '1.1.1970',
-                'downloadUrl' => '#'
-
-            ],            [
+            ], [
                 'fileName' => 'bla.jar',
                 'version' => '1.13.1',
                 'size' => '1337',
                 'date' => '1.1.1970',
                 'downloadUrl' => '#'
 
-            ],            [
-                'fileName' => 'bla.jar',
-                'version' => '1.13.0',
-                'size' => '1337',
-                'date' => '1.1.1970',
-                'downloadUrl' => '#'
-
-            ],
+            ]
         ];
 
         $versions = array_unique(array_map(function ($build) {
