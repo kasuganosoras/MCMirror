@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\CompilerPass\RegisterJsonApplicationsPass;
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\Config\Resource\FileResource;
@@ -16,50 +17,6 @@ class Kernel extends BaseKernel
 
     const CONFIG_EXTS = '.{php,xml,yaml,yml}';
 
-    public function getCacheDir()
-    {
-        return $this->getProjectDir().'/var/cache/'.$this->environment;
-    }
-
-    public function getLogDir()
-    {
-        return $this->getProjectDir().'/var/log';
-    }
-
-    public function registerBundles()
-    {
-        $contents = require $this->getProjectDir().'/config/bundles.php';
-        foreach ($contents as $class => $envs) {
-            if (isset($envs['all']) || isset($envs[$this->environment])) {
-                yield new $class();
-            }
-        }
-    }
-
-    protected function configureContainer(ContainerBuilder $container, LoaderInterface $loader)
-    {
-        $container->addResource(new FileResource($this->getProjectDir().'/config/bundles.php'));
-        // Feel free to remove the "container.autowiring.strict_mode" parameter
-        // if you are using symfony/dependency-injection 4.0+ as it's the default behavior
-        $container->setParameter('container.autowiring.strict_mode', true);
-        $container->setParameter('container.dumper.inline_class_loader', true);
-        $confDir = $this->getProjectDir().'/config';
-
-        $loader->load($confDir.'/{packages}/*'.self::CONFIG_EXTS, 'glob');
-        $loader->load($confDir.'/{packages}/'.$this->environment.'/**/*'.self::CONFIG_EXTS, 'glob');
-        $loader->load($confDir.'/{services}'.self::CONFIG_EXTS, 'glob');
-        $loader->load($confDir.'/{services}_'.$this->environment.self::CONFIG_EXTS, 'glob');
-    }
-
-    protected function configureRoutes(RouteCollectionBuilder $routes)
-    {
-        $confDir = $this->getProjectDir().'/config';
-
-        $routes->import($confDir.'/{routes}/*'.self::CONFIG_EXTS, '/', 'glob');
-        $routes->import($confDir.'/{routes}/'.$this->environment.'/**/*'.self::CONFIG_EXTS, '/', 'glob');
-        $routes->import($confDir.'/{routes}'.self::CONFIG_EXTS, '/', 'glob');
-    }
-
     public static function bootstrapCli(array &$argv)
     {
         // consume --env and --no-debug from the command line
@@ -69,7 +26,7 @@ class Kernel extends BaseKernel
 
         for ($i = 0; $i < \count($argv) && '--' !== $v = $argv[$i]; ++$i) {
             if ('--no-debug' === $v) {
-                putenv('APP_DEBUG='.$_SERVER['APP_DEBUG'] = $_ENV['APP_DEBUG'] = '0');
+                putenv('APP_DEBUG=' . $_SERVER['APP_DEBUG'] = $_ENV['APP_DEBUG'] = '0');
                 $argvUnset[$i] = true;
                 break;
             }
@@ -80,7 +37,7 @@ class Kernel extends BaseKernel
                 continue;
             }
             if (!empty($v[1]) || !empty($argv[1 + $i])) {
-                putenv('APP_ENV='.$_SERVER['APP_ENV'] = $_ENV['APP_ENV'] = empty($v[1]) ? $argv[1 + $i] : $v[1]);
+                putenv('APP_ENV=' . $_SERVER['APP_ENV'] = $_ENV['APP_ENV'] = empty($v[1]) ? $argv[1 + $i] : $v[1]);
                 $argvUnset[$i] = $argvUnset[$i + empty($v[1])] = true;
             }
             break;
@@ -94,7 +51,7 @@ class Kernel extends BaseKernel
     public static function bootstrapEnv($env = null)
     {
         if (null !== $env) {
-            putenv('APP_ENV='.$_SERVER['APP_ENV'] = $env);
+            putenv('APP_ENV=' . $_SERVER['APP_ENV'] = $env);
         }
 
         if ('prod' !== $_SERVER['APP_ENV'] = isset($_SERVER['APP_ENV']) ? $_SERVER['APP_ENV'] : (isset($_ENV['APP_ENV']) ? $_ENV['APP_ENV'] : null)) {
@@ -104,12 +61,12 @@ class Kernel extends BaseKernel
 
             // when using symfony/dotenv v4.2 or higher, this call and the related methods
             // below should be replaced by a call to the new Dotenv::loadEnv() method
-            self::loadEnv(new Dotenv(), \dirname(__DIR__).'/.env');
+            self::loadEnv(new Dotenv(), \dirname(__DIR__) . '/.env');
         }
 
         $_SERVER['APP_ENV'] = $_ENV['APP_ENV'] = isset($_SERVER['APP_ENV']) ? $_SERVER['APP_ENV'] : 'dev';
         $_SERVER['APP_DEBUG'] = isset($_SERVER['APP_DEBUG']) ? $_SERVER['APP_DEBUG'] : (isset($_ENV['APP_DEBUG']) ? $_ENV['APP_DEBUG'] : 'prod' !== $_SERVER['APP_ENV']);
-        $_SERVER['APP_DEBUG'] = $_ENV['APP_DEBUG'] = (int) $_SERVER['APP_DEBUG'] || filter_var($_SERVER['APP_DEBUG'], FILTER_VALIDATE_BOOLEAN) ? '1' : '0';
+        $_SERVER['APP_DEBUG'] = $_ENV['APP_DEBUG'] = (int)$_SERVER['APP_DEBUG'] || filter_var($_SERVER['APP_DEBUG'], FILTER_VALIDATE_BOOLEAN) ? '1' : '0';
     }
 
     private static function loadEnv(Dotenv $dotenv, $path)
@@ -132,5 +89,51 @@ class Kernel extends BaseKernel
         if (file_exists($p = "$path.$env.local")) {
             $dotenv->load($p);
         }
+    }
+
+    public function getCacheDir()
+    {
+        return $this->getProjectDir() . '/var/cache/' . $this->environment;
+    }
+
+    public function getLogDir()
+    {
+        return $this->getProjectDir() . '/var/log';
+    }
+
+    public function registerBundles()
+    {
+        $contents = require $this->getProjectDir() . '/config/bundles.php';
+        foreach ($contents as $class => $envs) {
+            if (isset($envs['all']) || isset($envs[$this->environment])) {
+                yield new $class();
+            }
+        }
+    }
+
+    protected function configureContainer(ContainerBuilder $container, LoaderInterface $loader)
+    {
+        $container->addResource(new FileResource($this->getProjectDir() . '/config/bundles.php'));
+        // Feel free to remove the "container.autowiring.strict_mode" parameter
+        // if you are using symfony/dependency-injection 4.0+ as it's the default behavior
+        $container->setParameter('container.autowiring.strict_mode', true);
+        $container->setParameter('container.dumper.inline_class_loader', true);
+        $confDir = $this->getProjectDir() . '/config';
+
+        $loader->load($confDir . '/{packages}/*' . self::CONFIG_EXTS, 'glob');
+        $loader->load($confDir . '/{packages}/' . $this->environment . '/**/*' . self::CONFIG_EXTS, 'glob');
+        $loader->load($confDir . '/{services}' . self::CONFIG_EXTS, 'glob');
+        $loader->load($confDir . '/{services}_' . $this->environment . self::CONFIG_EXTS, 'glob');
+
+        $container->addCompilerPass(new RegisterJsonApplicationsPass());
+    }
+
+    protected function configureRoutes(RouteCollectionBuilder $routes)
+    {
+        $confDir = $this->getProjectDir() . '/config';
+
+        $routes->import($confDir . '/{routes}/*' . self::CONFIG_EXTS, '/', 'glob');
+        $routes->import($confDir . '/{routes}/' . $this->environment . '/**/*' . self::CONFIG_EXTS, '/', 'glob');
+        $routes->import($confDir . '/{routes}' . self::CONFIG_EXTS, '/', 'glob');
     }
 }

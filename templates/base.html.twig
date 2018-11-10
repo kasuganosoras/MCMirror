@@ -5,17 +5,18 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta property="og:site_name" content="{{ env('WEBSITE_NAME') }}" />
-    <meta property="og:title" content="{{ title }}" />
-    <meta property="og:url" content="{{ app.request.uri }}" />
-    <meta property="og:type" content="website" />
-    <meta property="og:image" content="{{ asset('dist/icon.png') }}" />
-    <link rel="stylesheet" href="{{ asset('dist/bulma.min.css') }}" />
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" />
-    <link rel="stylesheet" href="{{ asset('dist/style.css') }}" />
+    <meta property="og:site_name" content="{{ env('WEBSITE_NAME') }}"/>
+    <meta property="og:title" content="{{ title }}"/>
+    <meta property="og:url" content="{{ app.request.uri }}"/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:image" content="{{ asset('dist/icon.png') }}"/>
+    <link rel="stylesheet" href="{{ asset('dist/bulma.min.css') }}"/>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.6/css/all.css"/>
+    <link rel="stylesheet" href="{{ asset('dist/style.css') }}"/>
 </head>
 <body>
-<section class="hero is-info is-medium" style="background-repeat: no-repeat;background-size: cover;background: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url({{ asset('/dist/header.jpg') }});background-position: center;">
+<section class="hero is-info is-medium"
+         style="background-repeat: no-repeat;background-size: cover;background: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url({{ asset('/dist/header.jpg') }});background-position: center;">
     <div class="hero-body">
         <div class="container has-text-centered">
             <h1 class="title is-2">{{ env('WEBSITE_NAME') }}</h1>
@@ -31,7 +32,7 @@
                         <ul>
                             <li><a href="{{ url('index') }}">Home</a></li>
                             <li><a data-modal-id="#downloads-modal" class="open-modal">Downloads</a></li>
-                            <li><a href="{{ url('api') }}">APIs</a></li>
+                            <li><a href="{{ url('api_index') }}">APIs</a></li>
                         </ul>
                     </nav>
                 </div>
@@ -58,7 +59,8 @@
 <footer class="footer">
     <div class="container">
         <div class="content has-text-centered">
-            <p><strong>{{ env('WEBSITE_NAME') }}</strong> is not affliated with Mojang nor any of the software hosted here.</p>
+            <p><strong>{{ env('WEBSITE_NAME') }}</strong> is not affliated with Mojang nor any of the software hosted
+                here.</p>
         </div>
     </div>
 </footer>
@@ -102,14 +104,14 @@
                 $('td.' + status + '[rel="' + value + '"]').parent('tr').show();
             }
         });
-        if(showAll){
+        if (showAll) {
             tr.show();
         }
     });
-    $(document).ready(function(){
-        $("#search").on("keyup", function() {
+    $(document).ready(function () {
+        $("#search").on("keyup", function () {
             var value = $(this).val().toLowerCase();
-            $("tbody tr").filter(function() {
+            $("tbody tr").filter(function () {
                 $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
             });
         });

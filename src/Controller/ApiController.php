@@ -2,15 +2,16 @@
 
 namespace App\Controller;
 
-use App\Applications\ApplicationInterface;
+use App\Application\ApplicationInterface;
 use App\Service\ApplicationService;
 use App\Service\BuildsService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/api", name="api")
+ * @Route("/api", name="api_")
  */
 class ApiController extends AbstractController
 {
@@ -34,6 +35,17 @@ class ApiController extends AbstractController
         $this->buildsService = $buildsService;
     }
 
+
+    /**
+     * @Route("/", name="index")
+     * @return Response
+     */
+    public function index(): Response
+    {
+        return $this->render('api/index.html.twig', [
+            'title' => 'API'
+        ]);
+    }
 
     /**
      * @Route("/list/{option?all}/{fileName}", name="list")
@@ -62,6 +74,13 @@ class ApiController extends AbstractController
         return new JsonResponse($response);
     }
 
+    private function getAll()
+    {
+        return array_map(function (ApplicationInterface $application) {
+            return $application->getName();
+        }, $this->applicationService->getApplications());
+    }
+
     private function getForBuild(string $option, string $fileName): array
     {
         $application = $this->applicationService->getApplication($option);
@@ -78,12 +97,5 @@ class ApiController extends AbstractController
         return array_map(function (array $build) {
             return $build['fileName'];
         }, $this->buildsService->getBuildsForApplication($this->applicationService->getApplication($applicationName)));
-    }
-
-    private function getAll()
-    {
-        return array_map(function (ApplicationInterface $application) {
-            return $application->getName();
-        }, $this->applicationService->getApplications());
     }
 }

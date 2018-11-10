@@ -4,7 +4,7 @@ namespace App\EventSubscriber;
 
 use App\Service\ApplicationService;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symfony\Component\HttpKernel\Event\GetResponseEvent;
+use Symfony\Component\VarDumper\VarDumper;
 use Twig\Environment;
 
 class SetTemplateApplicationVarSubscriber implements EventSubscriberInterface
@@ -24,16 +24,18 @@ class SetTemplateApplicationVarSubscriber implements EventSubscriberInterface
         $this->environment = $environment;
     }
 
-    public function onKernelRequest()
-    {
-        $this->environment->addGlobal('sortedApplications', $this->applicationService->getApplicationOrderedByCategory());
-        $this->environment->addGlobal('allApplications', $this->applicationService->getApplications());
-    }
-
     public static function getSubscribedEvents()
     {
         return [
-           'kernel.request' => 'onKernelRequest',
+            'kernel.request' => 'onKernelRequest',
         ];
+    }
+
+    public function onKernelRequest()
+    {
+        VarDumper::dump($this->applicationService->getApplications());
+
+        $this->environment->addGlobal('sortedApplications', $this->applicationService->getApplicationOrderedByCategory());
+        $this->environment->addGlobal('allApplications', $this->applicationService->getApplications());
     }
 }
