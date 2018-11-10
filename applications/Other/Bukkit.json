@@ -5,7 +5,7 @@
     "url": null,
     "name": "Bukkit",
     "category": "Other",
-    "officialLinks": [],
+    "officialLinks": {},
     "versionRegex": [
         "\/[a-zA-Z]+-([0-9.]+).*\/",
         "\/.*(latest).*\/"

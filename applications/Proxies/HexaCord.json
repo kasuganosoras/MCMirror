@@ -5,7 +5,7 @@
     "url": null,
     "name": "HexaCord",
     "category": "Proxies",
-    "officialLinks": [],
+    "officialLinks": {},
     "versionRegex": [
         "\/[a-zA-Z]+-([0-9.]+).*\/",
         "\/.*(latest).*\/"
