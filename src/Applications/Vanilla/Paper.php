@@ -47,4 +47,12 @@ class Paper implements ApplicationInterface
             'GitHub' => 'https://github.com/PaperMC/Paper',
         ];
     }
+
+    public function getVersionRegex(): array
+    {
+        return [
+            '/[a-zA-Z]+-([0-9.]+).*/',
+            '/.*(latest).*/',
+        ];
+    }
 }

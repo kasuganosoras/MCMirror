@@ -42,4 +42,12 @@ class Torch implements ApplicationInterface
     {
         return [];
     }
+
+    public function getVersionRegex(): array
+    {
+        return [
+            '/[a-zA-Z]+-([0-9.]+).*/',
+            '/.*(latest).*/',
+        ];
+    }
 }

@@ -21,4 +21,9 @@ interface ApplicationInterface
 
     public function getOfficialLinks(): array;
 
+    /**
+     * @return string|array
+     */
+    public function getVersionRegex();
+
 }

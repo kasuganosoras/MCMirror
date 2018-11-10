@@ -33,9 +33,31 @@ class BuildsService
 
         $builds = [];
         foreach ($finder as $file) {
+            $versionRegex = $application->getVersionRegex();
+
+            if (!\is_array($versionRegex)) {
+                $versionRegex = [$versionRegex];
+            }
+
+            $version = '';
+            foreach ($versionRegex as $regex) {
+                preg_match($regex, $file->getFilename(), $version);
+
+
+                if (isset($version[1])) {
+                    $version = $version[1];
+                    break;
+                }
+            }
+
+
+            if (\is_array($version)) {
+                $version = $file->getBasename();
+            }
+
             $builds[] = [
                 'fileName' => $file->getFilename(),
-                'version' => '', //TODO: Get correct Version
+                'version' => $version,
                 'size' => $file->getSize(),
                 'date' => date('Y-m-d', $file->getMTime()),
                 'downloadUrl' => $this->router->generate('files', [
