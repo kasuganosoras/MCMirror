@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Service\ApplicationService;
+use App\Service\BuildsService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -14,14 +15,20 @@ class DownloadsController extends AbstractController
      * @var ApplicationService
      */
     private $applicationService;
+    /**
+     * @var BuildsService
+     */
+    private $buildsService;
 
     /**
      * DownloadsController constructor.
      * @param ApplicationService $applicationService
+     * @param BuildsService $buildsService
      */
-    public function __construct(ApplicationService $applicationService)
+    public function __construct(ApplicationService $applicationService, BuildsService $buildsService)
     {
         $this->applicationService = $applicationService;
+        $this->buildsService = $buildsService;
     }
 
 
@@ -46,23 +53,7 @@ class DownloadsController extends AbstractController
             throw $this->createNotFoundException(sprintf('Could not find Application %s', $applicationName));
         }
 
-        $builds = [
-            [
-                'fileName' => 'bla.jar',
-                'version' => '1.13.2',
-                'size' => '1337',
-                'date' => '1.1.1970',
-                'downloadUrl' => '#'
-
-            ], [
-                'fileName' => 'bla.jar',
-                'version' => '1.13.1',
-                'size' => '1337',
-                'date' => '1.1.1970',
-                'downloadUrl' => '#'
-
-            ]
-        ];
+        $builds = $this->buildsService->getBuildsForApplication($application);
 
         $versions = array_unique(array_map(function ($build) {
             return $build['version'];
