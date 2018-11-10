@@ -9,31 +9,13 @@
     <meta property="og:title" content="{{ title }}" />
     <meta property="og:url" content="{{ app.request.uri }}" />
     <meta property="og:type" content="website" />
-    <meta property="og:image" content="/dist/icon.png" />
-    <link rel="stylesheet" href="/dist/bulma.min.css" />
+    <meta property="og:image" content="{{ asset('dist/icon.png') }}" />
+    <link rel="stylesheet" href="{{ asset('dist/bulma.min.css') }}" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" />
-    <style>
-        .panel-block {
-            display: block;
-        }
-        .hero.is-info .tabs.is-boxed a:hover,
-        .hero.is-info .tabs.is-toggle a:hover {
-            background-color: rgba(255, 255, 255, 0.1);
-        }
-        .title a {
-            color: inherit;
-        }
-        .modal-content .panel .panel-block {
-            background-color: white;
-        }
-        .modal-content .panel .panel-heading {
-            border-top-left-radius:0;
-            border-top-right-radius:0;
-        }
-    </style>
+    <link rel="stylesheet" href="{{ asset('dist/style.css') }}" />
 </head>
 <body>
-<section class="hero is-info is-medium" style="background-repeat: no-repeat;background-size: cover;background: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(/dist/header.jpg);background-position: center;">
+<section class="hero is-info is-medium" style="background-repeat: no-repeat;background-size: cover;background: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url({{ asset('/dist/header.jpg') }});background-position: center;">
     <div class="hero-body">
         <div class="container has-text-centered">
             <h1 class="title is-2">{{ env('WEBSITE_NAME') }}</h1>
@@ -47,17 +29,16 @@
                 <div class="column is-6">
                     <nav class="tabs is-boxed">
                         <ul>
-                            <li><a href="/">Home</a></li>
+                            <li><a href="{{ url('index') }}">Home</a></li>
                             <li><a data-modal-id="#downloads-modal" class="open-modal">Downloads</a></li>
-                            <li><a href="/apis">APIs</a></li>
+                            <li><a href="{{ url('api') }}">APIs</a></li>
                         </ul>
                     </nav>
                 </div>
                 <div class="column is-6">
                     <nav class="tabs is-boxed is-right">
                         <ul>
-                            <li><a href="https://discord.gg/KFEXyhH">Discord</a></li>
-                            <li><a href="https://twitter.com/ItsYive">Twitter</a></li>
+                            <li><a href="{{ env('DISCORD_LINK') }}">Discord</a></li>
                         </ul>
                     </nav>
                 </div>
