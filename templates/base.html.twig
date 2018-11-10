@@ -39,6 +39,7 @@
                     <nav class="tabs is-boxed is-right">
                         <ul>
                             <li><a href="{{ env('DISCORD_LINK') }}">Discord</a></li>
+                            <li><a href="{{ env('GITHUB_LINK') }}">GitHub</a></li>
                         </ul>
                     </nav>
                 </div>
@@ -76,21 +77,23 @@
         </nav>
     </div>
 </div>
-<script src="/dist/jquery.min.js"></script>
+<script src="{{ asset('/dist/jquery.min.js') }}"></script>
 <script>
     function toggleModalClasses(event) {
         var modalId = event.currentTarget.dataset.modalId;
         var modal = $(modalId);
         modal.toggleClass('is-active');
         $('html').toggleClass('is-clipped');
-    };
+    }
 
     $('.open-modal').click(toggleModalClasses);
     $('.close-modal').click(toggleModalClasses);
 
     $("input:checkbox").click(function () {
         var showAll = true;
-        $('tr').not('.first').hide();
+        var tr = $('tr');
+
+        tr.not('.first').hide();
         $('input[type=checkbox]').each(function () {
             if ($(this)[0].checked) {
                 showAll = false;
@@ -100,7 +103,7 @@
             }
         });
         if(showAll){
-            $('tr').show();
+            tr.show();
         }
     });
     $(document).ready(function(){
