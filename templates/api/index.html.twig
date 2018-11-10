@@ -1,20 +1,55 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello {{ controller_name }}!{% endblock %}
+{% block content %}
+    <div class="column is-12">
+        <div class="card">
+            <header class="card-header">
+                <p class="card-header-title">APIs</p>
+            </header>
+            <div class="card-content">
+                <div class="content">
+                    <h3>List - All</h3>
+                    <p><strong>Format:</strong> https://{{ app.request.host }}/api/list/{option}</p>
+                    <p><strong>Example URL:</strong> <a href="https://{{ app.request.host }}/api/list/all">https://{{ app.request.host }}/api/list/all</a></p>
+                    <p><strong>Info:</strong> This URL is just for listing the current options.</p>
+                    <pre>[
+{% for application in allApplications %}
+  "{{ application.name }}"{% if not loop.last %},{% endif %}
 
-{% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
-
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'src/Controller/ApiController.php'|file_link(0) }}">src/Controller/ApiController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'templates/api/index.html.twig'|file_link(0) }}">templates/api/index.html.twig</a></code></li>
-    </ul>
-</div>
+{% endfor %}
+]</pre>
+                    <h3>List - Example usage</h3>
+                    <p><strong>Format:</strong> https://{{ app.request.host }}/api/list/{option}</p>
+                    <p><strong>Example URL:</strong> <a href="https://{{ app.request.host }}/api/list/mcpc">https://{{ app.request.host }}/api/list/mcpc</a></p>
+                    <p><strong>Info:</strong> Real world usage for grabbing the list of files for MCPC+.</p>
+                    <pre>[
+  "mcpc-plus-1.6.4-R2.1-forge965-B243.jar",
+  "mcpc-plus-1.6.4-R2.1-forge965-B251.jar",
+  "mcpc-plus-1.5.2-R1.1-forge738-B653.jar",
+  "mcpc-plus-1.6.4-R2.1-forge965-B228.jar",
+  "mcpc-plus-1.6.4-R0.1-forge933-B101.jar",
+  "mcpc-plus-1.5.2-R1.1-forge738-B646.jar",
+  "mcpc-plus-1.4.7-R1.1-SNAPSHOT-f534-authfix1.jar",
+  "mcpc-plus-1.6.2-R0.1-forge804-B39.jar",
+  "mcpc-plus-1.4.7-R1.1-SNAPSHOT-f534-247.jar",
+  "craftbukkitplusplus-1.2.5-R4.1-MCPC-SNAPSHOT.jar"
+]</pre>
+                    <h3>File - Example Usage</h3>
+                    <p><strong>Format:</strong> https://{{ app.request.host }}/api/file/{option}/{filename}
+                    <p><strong>Example URL:</strong> <a href="https://{{ app.request.host }}/api/file/spigot/spigot-1.13-R0.1-SNAPSHOT-b1795.jar">https://{{ app.request.host }}/api/file/spigot/spigot-1.13-R0.1-SNAPSHOT-b1795.jar</a></p>
+                    <p><strong>Info:</strong> Real world usage for requesting information about spigot-1.13-R0.1-SNAPSHOT-b1795.jar.</p>
+                    <pre>{
+  "size_human": "43 MB",
+  "size_bytes": 45864727,
+  "file_name": "spigot-1.13-R0.1-SNAPSHOT-b1795.jar",
+  "date_human": "August 3, 2018",
+  "date_epoch": 1533340692,
+  "mc_version": "1.13",
+  "direct_link": "https://{{ app.request.host }}/files/spigot/spigot-1.13-R0.1-SNAPSHOT-b1795.jar",
+  "grab_link": "https://{{ app.request.host }}/grab/spigot/spigot-1.13-R0.1-SNAPSHOT-b1795.jar"
+}</pre>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}

@@ -7,7 +7,7 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Twig\Environment;
 
-class SetSortedApplicationsSubscriber implements EventSubscriberInterface
+class SetTemplateApplicationVarSubscriber implements EventSubscriberInterface
 {
     /**
      * @var ApplicationService
@@ -28,6 +28,7 @@ class SetSortedApplicationsSubscriber implements EventSubscriberInterface
     public function onKernelRequest(GetResponseEvent $event)
     {
         $this->environment->addGlobal('sortedApplications', $this->applicationService->getApplicationOrderedByCategory());
+        $this->environment->addGlobal('allApplications', $this->applicationService->getApplications());
     }
 
     public static function getSubscribedEvents()

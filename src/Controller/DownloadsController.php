@@ -70,7 +70,7 @@ class DownloadsController extends AbstractController
 
         return $this->render('downloads/index.html.twig', [
             'title' => $application->getName() . ' Downloads',
-            'name' => $application->getName(),
+            'application' => $application,
             'officialLinks' => $application->getOfficialLinks(),
             'versions' => $versions,
             'builds' => $builds,

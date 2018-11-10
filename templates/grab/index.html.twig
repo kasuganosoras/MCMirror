@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+<div class="column is-12">
+    <div class="card">
+        <header class="card-header">
+            <p class="card-header-title">File Download</p>
+        </header>
+        <div class="card-content">
+            <div class="content has-text-centered">
+                <div class="title"><a href="/files/{{ application.name }}/{{ filename }}">{{ filename }}</a></div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

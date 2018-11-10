@@ -27,7 +27,7 @@
                     <div class="level-left">
                         <div class="level-item">
                             <p class="subtitle is-5">
-                                <strong>Archive of {{ name }} Builds</strong>
+                                <strong>Archive of {{ application.name }} Builds</strong>
                             </p>
                         </div>
                     </div>
@@ -63,7 +63,10 @@
                                 <td class="mcversion">{{ build.version }}</td>
                                 <td>{{ build.size }}</td>
                                 <td>{{ build.date }}</td>
-                                <td><a class="button is-info" href="{{ build.downloadUrl }}">Download</a></td>
+                                <td>
+                                    <a class="button is-info"
+                                       href="{{ url('grab', {'applicationName': application.name, 'fileName': build.fileName}) }}">Download</a>
+                                </td>
                             </tr>
                         {% endfor %}
                     </table>
