@@ -117,7 +117,7 @@ class Kernel extends BaseKernel
         $dotenv->load($path);
 
         if (null === $env = isset($_SERVER['APP_ENV']) ? $_SERVER['APP_ENV'] : (isset($_ENV['APP_ENV']) ? $_ENV['APP_ENV'] : null)) {
-            $dotenv->populate(array('APP_ENV' => $env = 'dev'));
+            $dotenv->populate(['APP_ENV' => $env = 'dev']);
         }
 
         if ('test' !== $env && file_exists($p = "$path.local")) {

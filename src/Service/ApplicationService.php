@@ -13,6 +13,7 @@ class ApplicationService
 
     /**
      * ApplicationService constructor.
+     *
      * @param iterable $applications
      */
     public function __construct(iterable $applications)
@@ -32,7 +33,8 @@ class ApplicationService
         return $this->applications;
     }
 
-    public function getApplication(string $applicationName) {
+    public function getApplication(string $applicationName)
+    {
         foreach ($this->applications as $application) {
             if ($application->getName() === $applicationName) {
                 return $application;

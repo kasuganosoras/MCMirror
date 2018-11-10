@@ -1,10 +1,8 @@
 <?php
 
-
 namespace App\Applications\PocketEdition;
 
 use App\Applications\ApplicationInterface;
-
 
 class PocketMine implements ApplicationInterface
 {

@@ -1,12 +1,9 @@
 <?php
 
-
 namespace App\Applications;
-
 
 interface ApplicationInterface
 {
-
     public function isRecommended(): bool;
 
     public function isAbandoned(): bool;
@@ -25,5 +22,4 @@ interface ApplicationInterface
      * @return string|array
      */
     public function getVersionRegex();
-
 }

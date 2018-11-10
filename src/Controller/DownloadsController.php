@@ -22,15 +22,15 @@ class DownloadsController extends AbstractController
 
     /**
      * DownloadsController constructor.
+     *
      * @param ApplicationService $applicationService
-     * @param BuildsService $buildsService
+     * @param BuildsService      $buildsService
      */
     public function __construct(ApplicationService $applicationService, BuildsService $buildsService)
     {
         $this->applicationService = $applicationService;
         $this->buildsService = $buildsService;
     }
-
 
     /**
      * @Route("/downloads", name="downloads")
@@ -42,14 +42,16 @@ class DownloadsController extends AbstractController
 
     /**
      * @Route("/downloads/{applicationName}", name="application_overview")
+     *
      * @param string $applicationName
+     *
      * @return Response
      */
     public function applicationOverview(string $applicationName): Response
     {
         $application = $this->applicationService->getApplication($applicationName);
 
-        if ($application === null) {
+        if (null === $application) {
             throw $this->createNotFoundException(sprintf('Could not find Application %s', $applicationName));
         }
 
@@ -60,7 +62,7 @@ class DownloadsController extends AbstractController
         }, $builds));
 
         return $this->render('downloads/index.html.twig', [
-            'title' => $application->getName() . ' Downloads',
+            'title' => $application->getName().' Downloads',
             'application' => $application,
             'officialLinks' => $application->getOfficialLinks(),
             'versions' => $versions,

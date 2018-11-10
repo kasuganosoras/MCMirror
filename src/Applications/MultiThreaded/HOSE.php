@@ -1,10 +1,8 @@
 <?php
 
-
 namespace App\Applications\MultiThreaded;
 
 use App\Applications\ApplicationInterface;
-
 
 class HOSE implements ApplicationInterface
 {

@@ -24,8 +24,7 @@ class SetTemplateApplicationVarSubscriber implements EventSubscriberInterface
         $this->environment = $environment;
     }
 
-
-    public function onKernelRequest(GetResponseEvent $event)
+    public function onKernelRequest()
     {
         $this->environment->addGlobal('sortedApplications', $this->applicationService->getApplicationOrderedByCategory());
         $this->environment->addGlobal('allApplications', $this->applicationService->getApplications());

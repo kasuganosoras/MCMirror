@@ -1,10 +1,8 @@
 <?php
 
-
 namespace App\Applications\Forge;
 
 use App\Applications\ApplicationInterface;
-
 
 class Thermos implements ApplicationInterface
 {

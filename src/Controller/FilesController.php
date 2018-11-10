@@ -20,8 +20,9 @@ class FilesController extends AbstractController
 
     /**
      * FilesController constructor.
+     *
      * @param ApplicationService $applicationService
-     * @param BuildsService $buildsService
+     * @param BuildsService      $buildsService
      */
     public function __construct(ApplicationService $applicationService, BuildsService $buildsService)
     {
@@ -29,18 +30,19 @@ class FilesController extends AbstractController
         $this->buildsService = $buildsService;
     }
 
-
     /**
      * @Route("/files/{applicationName}/{fileName}", name="files")
+     *
      * @param string $applicationName
      * @param string $fileName
+     *
      * @return \Symfony\Component\HttpFoundation\BinaryFileResponse
      */
     public function index(string $applicationName, string $fileName)
     {
         $application = $this->applicationService->getApplication($applicationName);
 
-        if ($application === null) {
+        if (null === $application) {
             throw $this->createNotFoundException(sprintf('Could not find Application %s', $applicationName));
         }
 

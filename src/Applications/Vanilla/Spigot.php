@@ -1,14 +1,11 @@
 <?php
 
-
 namespace App\Applications\Vanilla;
 
 use App\Applications\ApplicationInterface;
 
-
 class Spigot implements ApplicationInterface
 {
-
     public function isRecommended(): bool
     {
         return false;

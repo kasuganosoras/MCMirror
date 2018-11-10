@@ -1,10 +1,8 @@
 <?php
 
-
 namespace App\Applications\Other;
 
 use App\Applications\ApplicationInterface;
-
 
 class Pixelmon implements ApplicationInterface
 {

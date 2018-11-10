@@ -21,8 +21,9 @@ class GrabController extends AbstractController
 
     /**
      * DownloadsController constructor.
+     *
      * @param ApplicationService $applicationService
-     * @param BuildsService $buildsService
+     * @param BuildsService      $buildsService
      */
     public function __construct(ApplicationService $applicationService, BuildsService $buildsService)
     {
@@ -32,15 +33,17 @@ class GrabController extends AbstractController
 
     /**
      * @Route("/grab/{applicationName}/{fileName}", name="grab")
+     *
      * @param string $applicationName
      * @param string $fileName
+     *
      * @return Response
      */
     public function index(string $applicationName, string $fileName): Response
     {
         $application = $this->applicationService->getApplication($applicationName);
 
-        if ($application === null) {
+        if (null === $application) {
             throw $this->createNotFoundException(sprintf('Could not find Application %s', $applicationName));
         }
 
@@ -49,7 +52,7 @@ class GrabController extends AbstractController
         }
 
         return $this->render('grab/index.html.twig', [
-            'title' => 'Download ' . $fileName,
+            'title' => 'Download '.$fileName,
             'application' => $application,
             'filename' => $fileName,
         ]);

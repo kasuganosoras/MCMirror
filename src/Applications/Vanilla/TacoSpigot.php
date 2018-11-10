@@ -1,10 +1,8 @@
 <?php
 
-
 namespace App\Applications\Vanilla;
 
 use App\Applications\ApplicationInterface;
-
 
 class TacoSpigot implements ApplicationInterface
 {

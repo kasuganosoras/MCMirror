@@ -1,10 +1,8 @@
 <?php
 
-
 namespace App\Applications\Proxies;
 
 use App\Applications\ApplicationInterface;
-
 
 class Travertine implements ApplicationInterface
 {
