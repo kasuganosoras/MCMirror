@@ -5,6 +5,7 @@ namespace App\CompilerPass;
 
 
 use App\Application\JsonApplication;
+use Symfony\Component\Config\Resource\DirectoryResource;
 use Symfony\Component\Config\Resource\FileResource;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -23,14 +24,21 @@ class RegisterJsonApplicationsPass implements CompilerPassInterface
         $rootDir = $container->getParameter('kernel.root_dir');
         $applicationsPath = $rootDir . '/../applications';
 
-        $finder = new Finder();
-        $finder->files()->in($applicationsPath);
+        $container->addResource(new DirectoryResource($applicationsPath));
 
+        $finder = new Finder();
+
+        $finder->directories()->in($applicationsPath);
+        foreach ($finder as $folders) {
+            $resource = new DirectoryResource($folders);
+            $container->addResource($resource);
+        }
+
+        $finder->files()->in($applicationsPath);
         foreach ($finder as $file) {
             $jsonData = json_decode($file->getContents(), true);
 
-            $resource = new FileResource($file->getRealPath());
-            $container->addResource($resource);
+            $container->addResource(new FileResource($file->getRealPath()));
 
             $container->register('App\\Application\\JsonApplication\\' . $jsonData['name'])
                 ->setClass(JsonApplication::class)
