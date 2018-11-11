@@ -4,7 +4,7 @@
     "external": false,
     "url": null,
     "name": "CraftBukkit",
-    "category": "Other",
+    "category": "Vanilla",
     "officialLinks": {},
     "versionRegex": [
         "\/[a-zA-Z]+-([0-9.]+).*\/",
