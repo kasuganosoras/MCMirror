@@ -19,38 +19,42 @@ class RegisterJsonApplicationsPass implements CompilerPassInterface
      * You can modify the container here before it is dumped to PHP code.
      * @param ContainerBuilder $container
      */
-    public function process(ContainerBuilder $container)
+    public function process(ContainerBuilder $container): void
     {
         $rootDir = $container->getParameter('kernel.root_dir');
         $applicationsPath = $rootDir . '/../applications';
 
+        $categoriesFile = $applicationsPath . DIRECTORY_SEPARATOR . 'Categories.json';
+
         $container->addResource(new DirectoryResource($applicationsPath));
+        $container->addResource(new FileResource($categoriesFile));
 
-        $finder = new Finder();
+        $container->setParameter('application.categoryOrder', json_decode(file_get_contents($categoriesFile), true));
 
-        $finder->directories()->in($applicationsPath);
-        foreach ($finder as $folders) {
-            $resource = new DirectoryResource($folders);
-            $container->addResource($resource);
-        }
+        $folderFinder = new Finder();
+        $folderFinder->directories()->in($applicationsPath);
+        foreach ($folderFinder as $folder) {
+            $container->addResource(new DirectoryResource($folder));
+            
+            $fileFinder = new Finder();
+            $fileFinder->files()->in($folder->getRealPath());
+            foreach ($fileFinder as $file) {
+                $jsonData = json_decode($file->getContents(), true);
 
-        $finder->files()->in($applicationsPath);
-        foreach ($finder as $file) {
-            $jsonData = json_decode($file->getContents(), true);
+                $container->addResource(new FileResource($file->getRealPath()));
 
-            $container->addResource(new FileResource($file->getRealPath()));
-
-            $container->register('App\\Application\\JsonApplication\\' . $jsonData['name'])
-                ->setClass(JsonApplication::class)
-                ->setFactory([__CLASS__, 'createJsonApplication'])
-                ->setArgument(0, $file->getRealPath())
-                ->addTag('app.application');
+                $container->register('App\\Application\\JsonApplication\\' . $jsonData['name'])
+                    ->setClass(JsonApplication::class)
+                    ->setFactory([__CLASS__, 'createJsonApplication'])
+                    ->setArgument(0, json_decode($file->getContents(), true))
+                    ->addTag('app.application');
+            }
         }
     }
 
-    public function createJsonApplication(string $filePath): JsonApplication
+    public function createJsonApplication(array $jsonData): JsonApplication
     {
-        return new JsonApplication(json_decode(file_get_contents($filePath), true));
+        return new JsonApplication($jsonData);
     }
 }
 
