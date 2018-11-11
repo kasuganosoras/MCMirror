@@ -52,17 +52,27 @@ class BuildsService
             $versionRegex = [$versionRegex];
         }
 
-        $version = '';
-        foreach ($versionRegex as $regex) {
-            preg_match($regex, $file->getFilename(), $version);
 
-            if (isset($version[1])) {
-                $version = $version[1];
+        $version = null;
+        foreach ($application->getVersionGroupOverride() as $group => $regex) {
+            if (preg_match($regex, $file->getFilename()) === 1) {
+                $version = $group;
                 break;
             }
         }
 
-        if (\is_array($version)) {
+        if ($version === null) {
+            foreach ($versionRegex as $regex) {
+                preg_match($regex, $file->getFilename(), $version);
+
+                if (isset($version[1])) {
+                    $version = $version[1];
+                    break;
+                }
+            }
+        }
+
+        if ($version === null || \is_array($version)) {
             $version = $file->getBasename();
         }
 
@@ -124,9 +134,10 @@ class BuildsService
         return null;
     }
 
-    private function getHumanFilesize($bytes, $decimals = 2) {
+    private function getHumanFilesize($bytes, $decimals = 2)
+    {
         $sz = 'BKMGTP';
-        $factor = (int) floor((\strlen($bytes) - 1) / 3);
+        $factor = (int)floor((\strlen($bytes) - 1) / 3);
         return sprintf("%.{$decimals}f", $bytes / (1024 ** $factor)) . @$sz[$factor];
     }
 }
