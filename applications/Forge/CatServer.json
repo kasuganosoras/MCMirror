@@ -4,7 +4,7 @@
     "external": true,
     "url": "https://github.com/Luohuayu/CatServer",
     "name": "CatServer",
-    "category": "Other",
+    "category": "Forge",
     "officialLinks": {},
     "versionRegex": [
         "\/[a-zA-Z]+-([0-9.]+).*\/",
