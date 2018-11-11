@@ -61,10 +61,18 @@ class DownloadsController extends AbstractController
             return strnatcmp($b['version'], $a['version']);
         });
 
+        foreach ($builds as &$build) {
+            foreach ($application->getVersionGroupOverride() as $group => $regex) {
+                if (preg_match($regex, $build['fileName']) === 1) {
+                    $build['version'] = $group;
+                    break;
+                }
+            }
+        }
+
         $versions = array_unique(array_map(function ($build) {
             return $build['version'];
         }, $builds));
-
 
         usort($versions, function ($a, $b) {
             return strnatcmp($b, $a);
