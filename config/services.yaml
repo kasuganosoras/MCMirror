@@ -31,7 +31,7 @@ services:
 
 
   App\Service\ApplicationService:
-    arguments: [!tagged app.application]
+    arguments: [!tagged app.application, '%application.categoryOrder%']
 
   # add more service definitions when explicit configuration is needed
   # please note that last definitions always *replace* previous ones
