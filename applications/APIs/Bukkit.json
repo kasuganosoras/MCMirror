@@ -4,7 +4,7 @@
     "external": false,
     "url": null,
     "name": "Bukkit",
-    "category": "Other",
+    "category": "APIs",
     "officialLinks": {},
     "versionRegex": [
         "\/[a-zA-Z]+-([0-9.]+).*\/",

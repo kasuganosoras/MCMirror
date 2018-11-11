@@ -1,5 +1,11 @@
 {% extends 'base.html.twig' %}
 
+{% block additional_meta %}
+<meta property="og:description" content="Downloads for {{ application.name }}." />
+<meta name="description" content="Downloads for {{ application.name }}.">
+<meta name="keywords" content="{{ application.name }} download, {{ application.name }}">
+{% endblock %}
+
 {% block content %}
     <div class="column is-3">
         <nav class="panel">

@@ -1,15 +1,23 @@
 <!doctype html>
-<html>
+<html lang="{{ app.request.locale }}">
 <head>
     <title>{{ env('WEBSITE_NAME')|trans }} | {{ title|trans }}</title>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta property="og:site_name" content="{{ env('WEBSITE_NAME')|trans }}"/>
-    <meta property="og:title" content="{{ title|trans }}"/>
-    <meta property="og:url" content="{{ app.request.uri }}"/>
-    <meta property="og:type" content="website"/>
-    <meta property="og:image" content="{{ asset('dist/icon.png') }}"/>
+    {% block meta %}
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta property="og:site_name" content="{{ env('WEBSITE_NAME')|trans }}"/>
+        <meta property="og:title" content="{{ title|trans }}"/>
+        <meta property="og:url" content="{{ app.request.uri }}"/>
+        <meta property="og:type" content="website"/>
+        <meta property="og:image" content="{{ asset('dist/icon.png') }}">
+        {% block additional_meta %}
+            <meta property="og:description" content="Downloads for server software to run Minecraft servers." />
+            <meta name="description" content="Downloads for server software to run Minecraft servers.">
+            <meta name="keywords" content="mcmirror, minecraft server download">
+        {% endblock %}
+    {% endblock %}
+
     <link rel="stylesheet" href="{{ asset('dist/bulma.min.css') }}"/>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.6/css/all.css"/>
     <link rel="stylesheet" href="{{ asset('dist/style.css') }}"/>
@@ -31,7 +39,8 @@
                     <nav class="tabs is-boxed">
                         <ul>
                             <li><a href="{{ url('index') }}">{% trans %}Home{% endtrans %}</a></li>
-                            <li><a data-modal-id="#downloads-modal" class="open-modal">{% trans %}Downloads{% endtrans %}</a></li>
+                            <li><a data-modal-id="#downloads-modal"
+                                   class="open-modal">{% trans %}Downloads{% endtrans %}</a></li>
                             <li><a href="{{ url('api_index') }}">{% trans %}APIs{% endtrans %}</a></li>
                         </ul>
                     </nav>
@@ -71,9 +80,12 @@
                 {% include 'parts/application.html.twig' with {'applications': applications, 'category': category} only %}
             {% endfor %}
             <div class="panel-block">
-                <p><span class="tag is-info">{% trans %}External{% endtrans %}</span> - {% trans %}Outgoing link to an external download location.{% endtrans %}</p>
-                <p><span class="tag is-danger">{% trans %}Abandoned{% endtrans %}</span> - {% trans %}Project was abandoned by its developers.{% endtrans %}</p>
-                <p><span class="tag is-success"><i class="fas fa-star"></i></span> - {% trans %}Recommended{% endtrans %}</p>
+                <p><span class="tag is-info">{% trans %}External{% endtrans %}</span>
+                    - {% trans %}Outgoing link to an external download location.{% endtrans %}</p>
+                <p><span class="tag is-danger">{% trans %}Abandoned{% endtrans %}</span>
+                    - {% trans %}Project was abandoned by its developers.{% endtrans %}</p>
+                <p><span class="tag is-success"><i class="fas fa-star"></i></span>
+                    - {% trans %}Recommended{% endtrans %}</p>
             </div>
         </nav>
     </div>
