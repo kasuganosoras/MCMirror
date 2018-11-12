@@ -18,8 +18,15 @@ composer install
 ## Start
 To start MCMirror locally (after you finished installation) run:
 
+
+### PHP-PM
 ```
 php vendor/bin/ppm start --bootstrap=symfony --app-env=prod --logging=0 --debug=0 --workers=20 --static-directory=public/
 ```
+Your Self-Hosted MCMirror will be available at 127.0.0.1:8080
 
-### Your Self-Hosted MCMirror will be available at 127.0.0.1:8080
+
+You can start the Website with PHP-PM, but currently it does not like the generated Container Cache. If you want to modify the PHP Code use the following instead:
+```
+php bin/console server:run
+```
