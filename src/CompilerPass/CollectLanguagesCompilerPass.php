@@ -7,6 +7,7 @@ namespace App\CompilerPass;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Finder\Finder;
+use Symfony\Component\Yaml\Yaml;
 
 class CollectLanguagesCompilerPass implements CompilerPassInterface
 {
@@ -25,7 +26,11 @@ class CollectLanguagesCompilerPass implements CompilerPassInterface
 
         $languages = [];
         foreach ($finder as $file) {
-            $languages[] = explode('.', $file->getFilename())[1];
+            $languageKey = explode('.', $file->getFilename())[1];
+
+            $languageFileContent = Yaml::parseFile($file->getRealPath());
+
+            $languages[$languageKey] = $languageFileContent['languageName'];
         }
 
         $container->setParameter('app.availableLanguages', $languages);

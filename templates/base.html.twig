@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="{{ app.request.locale }}">
 <head>
     <title>{{ env('WEBSITE_NAME')|trans }} | {{ title|trans }}</title>
@@ -18,13 +18,58 @@
         {% endblock %}
     {% endblock %}
 
-    <link rel="stylesheet" href="{{ asset('dist/bulma.min.css') }}"/>
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.6/css/all.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
     <link rel="stylesheet" href="{{ asset('dist/style.css') }}"/>
 </head>
 <body>
-<section class="hero is-info is-medium"
-         style="background-repeat: no-repeat;background-size: cover;background: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url({{ asset('/dist/header.jpg') }});background-position: center;">
+
+<section class="hero is-primary is-small" style="background-repeat: no-repeat;background-size: cover;background: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url({{ asset('/dist/header.jpg') }});background-position: center;">
+    <div class="hero-head">
+        <nav class="navbar">
+            <div class="container">
+                <div id="navbarMenuHeroA" class="navbar-menu">
+                    <div class="navbar-end">
+                        <div class="dropdown navbar-item">
+                            <div class="dropdown-trigger">
+                                <button class="button" aria-haspopup="true" aria-controls="dropdown-menu">
+                                    <span>{% trans %}Language{% endtrans %}</span>
+                                    <span class="icon is-small">
+                                    <i class="fas fa-angle-down" aria-hidden="true"></i>
+                                  </span>
+                                </button>
+                            </div>
+                            <div class="dropdown-menu" id="dropdown-menu" role="menu">
+                                <div class="dropdown-content">
+                                    {% for languageKey,languageName in availableLanguages %}
+                                    <a href="{{ path(app.request.attributes.get('_route'),  app.request.attributes.get('_route_params')|merge({'lang': languageKey})) }}" class="dropdown-item {% if app.request.session.get('lang') == languageKey %}is-active{% endif %}">
+                                        {{ languageName }}
+                                    </a>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                        <span class="navbar-item">
+                          <a class="button is-primary is-inverted" href="{{ env('DISCORD_LINK') }}">
+                            <span class="icon">
+                              <i class="fab fa-discord"></i>
+                            </span>
+                            <span>{% trans %}Discord{% endtrans %}</span>
+                          </a>
+                        </span>
+                        <span class="navbar-item">
+                          <a class="button is-primary is-inverted" href="{{ env('GITHUB_LINK') }}">
+                            <span class="icon">
+                              <i class="fab fa-github"></i>
+                            </span>
+                            <span>{% trans %}GitHub{% endtrans %}</span>
+                          </a>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </div>
     <div class="hero-body">
         <div class="container has-text-centered">
             <h1 class="title is-2">{{ env('WEBSITE_NAME')|trans }}</h1>
@@ -33,28 +78,17 @@
         </div>
     </div>
     <div class="hero-foot">
-        <div class="container">
-            <div class="columns">
-                <div class="column is-6">
-                    <nav class="tabs is-boxed">
-                        <ul>
-                            <li><a href="{{ url('index') }}">{% trans %}Home{% endtrans %}</a></li>
-                            <li><a data-modal-id="#downloads-modal"
-                                   class="open-modal">{% trans %}Downloads{% endtrans %}</a></li>
-                            <li><a href="{{ url('api_index') }}">{% trans %}APIs{% endtrans %}</a></li>
-                        </ul>
-                    </nav>
-                </div>
-                <div class="column is-6">
-                    <nav class="tabs is-boxed is-right">
-                        <ul>
-                            <li><a href="{{ env('DISCORD_LINK') }}">{% trans %}Discord{% endtrans %}</a></li>
-                            <li><a href="{{ env('GITHUB_LINK') }}">{% trans %}GitHub{% endtrans %}</a></li>
-                        </ul>
-                    </nav>
-                </div>
+        <nav class="tabs is-boxed">
+            <div class="container">
+                <ul>
+                    <li><a class="{% if app.request.attributes.get('_route') == 'index' %}is-active{% endif %}"
+                           href="{{ url('index') }}">{% trans %}Home{% endtrans %}</a></li>
+                    <li><a data-modal-id="#downloads-modal" class="open-modal">{% trans %}Downloads{% endtrans %}</a></li>
+                    <li><a class="{% if app.request.attributes.get('_route') == 'api_index' %}is-active{% endif %}"
+                           href="{{ url('api_index') }}">{% trans %}APIs{% endtrans %}</a></li>
+                </ul>
             </div>
-        </div>
+        </nav>
     </div>
 </section>
 <section class="section">
@@ -90,43 +124,7 @@
         </nav>
     </div>
 </div>
-<script src="{{ asset('/dist/jquery.min.js') }}"></script>
-<script>
-    function toggleModalClasses(event) {
-        var modalId = event.currentTarget.dataset.modalId;
-        var modal = $(modalId);
-        modal.toggleClass('is-active');
-        $('html').toggleClass('is-clipped');
-    }
-
-    $('.open-modal').click(toggleModalClasses);
-    $('.close-modal').click(toggleModalClasses);
-
-    $("input:checkbox").click(function () {
-        var showAll = true;
-        var tr = $('tr');
-
-        tr.not('.first').hide();
-        $('input[type=checkbox]').each(function () {
-            if ($(this)[0].checked) {
-                showAll = false;
-                var status = $(this).attr('rel');
-                var value = $(this).val();
-                $('td.' + status + '[rel="' + value + '"]').parent('tr').show();
-            }
-        });
-        if (showAll) {
-            tr.show();
-        }
-    });
-    $(document).ready(function () {
-        $("#search").on("keyup", function () {
-            var value = $(this).val().toLowerCase();
-            $("tbody tr").filter(function () {
-                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-            });
-        });
-    });
-</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="{{ asset('/dist/script.js') }}"></script>
 </body>
 </html>
