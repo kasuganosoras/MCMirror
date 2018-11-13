@@ -5,8 +5,48 @@
 .hero.is-info .tabs.is-toggle a:hover {
     background-color: rgba(255, 255, 255, 0.1);
 }
+
+/* Make navbar text color inherited */
+.hero.is-primary .navbar-item,
+.hero.is-primary .navbar-link {
+    color: inherit;
+}
+
+/* Navbar hover item/link */
+.hero.is-primary a.navbar-item:hover,
+.hero.is-primary a.navbar-link:hover,
+.hero.is-primary a.navbar-item.is-active:hover {
+    border-radius: 4px 4px 0 0;
+    background-color: rgba(10,10,10,.1);
+}
+
+/* Navbar active item */
+.hero.is-primary a.navbar-item.is-active {
+    background-color: transparent;
+}
+
+/* Navbar dropdown hover */
+.hero.is-primary .navbar-dropdown a.navbar-item:hover {
+    background-color: transparent;
+    color: #27a6ff;
+}
+
+/* Make the navbar link arrows use the text color */
+.navbar-link:not(.is-arrowless)::after {
+    border-color: inherit;
+}
+
+/* Remove the dropdown menu top border and change text color */
+.navbar-dropdown {
+    border-top: 0px;
+    color: #363636;
+}
+
 .title a {
     color: inherit;
+}
+.footer {
+    padding: 30px;
 }
 .modal-content .panel .panel-block {
     background-color: white;
