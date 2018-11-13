@@ -7,7 +7,7 @@
     "category": "APIs",
     "officialLinks": {},
     "versionRegex": [
-        "\/[a-zA-Z]+-([0-9.]+).*\/",
+        "\/[a-zA-Z]+-([0-9.]+)\\..*\/",
         "\/.*(latest).*\/"
     ]
 }

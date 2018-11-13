@@ -29,8 +29,7 @@ class RegisterJsonApplicationsPass implements CompilerPassInterface
         $container->addResource(new DirectoryResource($applicationsPath));
         $container->addResource(new FileResource($categoriesFile));
 
-        $container->setParameter('application.categoryOrder', json_decode(file_get_contents($categoriesFile), true));
-
+        $existingCategories = [];
         $folderFinder = new Finder();
         $folderFinder->directories()->in($applicationsPath);
         foreach ($folderFinder as $folder) {
@@ -40,16 +39,44 @@ class RegisterJsonApplicationsPass implements CompilerPassInterface
             $fileFinder->files()->in($folder->getRealPath());
             foreach ($fileFinder as $file) {
                 $jsonData = json_decode($file->getContents(), true);
+                $existingCategories[] = $jsonData['category'];
 
                 $container->addResource(new FileResource($file->getRealPath()));
 
                 $container->register('App\\Application\\JsonApplication\\' . $jsonData['name'])
                     ->setClass(JsonApplication::class)
                     ->setFactory([__CLASS__, 'createJsonApplication'])
-                    ->setArgument(0, json_decode($file->getContents(), true))
+                    ->setArgument(0, $jsonData)
                     ->addTag('app.application');
+
             }
         }
+
+        $categoryOrder = json_decode(file_get_contents($categoriesFile), true);
+        $existingCategories = array_keys(array_flip($existingCategories));
+
+        $container->setParameter('application.categories', $this->getCategories($existingCategories, $categoryOrder));
+    }
+
+    private function getCategories(array $existingCategories, array $categoryOrder): array
+    {
+            $orderedCategories = [];
+
+            foreach ($categoryOrder as $orderKey => $orderCategory) {
+                if (\in_array($orderCategory, $existingCategories, true)) {
+                    $orderedCategories[$orderKey] = $orderCategory;
+                }
+            }
+            foreach ($existingCategories as $key => $category) {
+                if (\in_array($category, $categoryOrder, true)) {
+                    unset($existingCategories[$key]);
+                    continue;
+                }
+
+                $orderedCategories[] = $category;
+            }
+
+            return $orderedCategories;
     }
 
     public function createJsonApplication(array $jsonData): JsonApplication
