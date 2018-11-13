@@ -79,7 +79,7 @@ class RegisterJsonApplicationsPass implements CompilerPassInterface
             return $orderedCategories;
     }
 
-    public function createJsonApplication(array $jsonData): JsonApplication
+    public static function createJsonApplication(array $jsonData): JsonApplication
     {
         return new JsonApplication($jsonData);
     }
