@@ -20,6 +20,10 @@
     background-color: rgba(10,10,10,.1);
 }
 
+.navbar-item.has-dropdown.is-active .navbar-link, .navbar-item.has-dropdown:hover .navbar-link {
+        background-color: rgba(10,10,10,.1);
+}
+
 /* Navbar active item */
 .hero.is-primary a.navbar-item.is-active {
     background-color: transparent;
