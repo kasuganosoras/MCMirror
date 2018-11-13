@@ -30,12 +30,4 @@ Info: Info
 'Real world usage for grabbing the list of files for %applicationName%.': 'Real world usage for grabbing the list of files for %applicationName%.'
 File: File
 'Real world usage for requesting information about %buildName%.': 'Real world usage for requesting information about %buildName%.'
-'Vanilla': 'Vanilla'
-'Forge': 'Forge'
-'Proxies': 'Proxies'
-'Pocket Edition': 'Pocket Edition'
-'Multi-Threaded': 'Multi-Threaded'
-'Mods': 'Mods'
-'APIs': 'APIs'
-'Alternative': 'Alternative'
 languageName: English
