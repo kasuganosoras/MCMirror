@@ -33,7 +33,7 @@
                         <div class="dropdown navbar-item">
                             <div class="dropdown-trigger">
                                 <button class="button" aria-haspopup="true" aria-controls="dropdown-menu">
-                                    <span>{% trans %}Language{% endtrans %}</span>
+                                    <span>{{ availableLanguages[app.request.session.get('lang')] }}</span>
                                     <span class="icon is-small">
                                     <i class="fas fa-angle-down" aria-hidden="true"></i>
                                   </span>
@@ -42,9 +42,11 @@
                             <div class="dropdown-menu" id="dropdown-menu" role="menu">
                                 <div class="dropdown-content">
                                     {% for languageKey,languageName in availableLanguages %}
-                                    <a href="{{ path(app.request.attributes.get('_route'),  app.request.attributes.get('_route_params')|merge({'lang': languageKey})) }}" class="dropdown-item {% if app.request.session.get('lang') == languageKey %}is-active{% endif %}">
-                                        {{ languageName }}
-                                    </a>
+                                        {% if app.request.session.get('lang') != languageKey %}
+                                            <a href="{{ path(app.request.attributes.get('_route'),  app.request.attributes.get('_route_params')|merge({'lang': languageKey})) }}" class="dropdown-item">
+                                                {{ languageName }}
+                                            </a>
+                                        {% endif %}
                                     {% endfor %}
                                 </div>
                             </div>
