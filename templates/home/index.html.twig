@@ -1,18 +1,35 @@
 {% extends 'base.html.twig' %}
 
 {% block content %}
+    <div class="column is-12">
+            <p class="panel-heading">Filter</p>
+            <div class="panel-block">
+                <a class="button is-success is-focused is-filter" rel="recommended">
+                    <i class="fas fa-star"></i> {% trans %}Recommended{% endtrans %}
+                </a>
+                <a class="button is-danger is-focused is-filter" rel="abandoned">
+                    <i class="fas fa-star"></i> {% trans %}Abandoned{% endtrans %}
+                </a>
+                <a class="button is-info is-focused is-filter" rel="external">
+                    <i class="fas fa-star"></i> {% trans %}External{% endtrans %}
+                </a>
+            </div>
+    </div>
     {% for category,applications in sortedApplications %}
         {% include 'home/parts/application.html.twig' with {'applications': applications, 'category': category} only %}
     {% endfor %}
     <div class="column is-full columns is-multiline">
         <div class="column is-4">
-            <p><span class="tag is-info">{% trans %}External{% endtrans %}</span> - {% trans %}Outgoing link to an external download location.{% endtrans %}</p>
+            <p><span class="tag is-info">{% trans %}External{% endtrans %}</span>
+                - {% trans %}Outgoing link to an external download location.{% endtrans %}</p>
         </div>
         <div class="column is-4">
-            <p><span class="tag is-danger">{% trans %}Abandoned{% endtrans %}</span> - {% trans %}Project was abandoned by its developers.{% endtrans %}</p>
+            <p><span class="tag is-danger">{% trans %}Abandoned{% endtrans %}</span>
+                - {% trans %}Project was abandoned by its developers.{% endtrans %}</p>
         </div>
         <div class="column is-4">
-            <p><span class="tag is-success"><i class="fas fa-star"></i></span> - {% trans %}Recommended{% endtrans %}</p>
+            <p><span class="tag is-success"><i class="fas fa-star"></i></span> - {% trans %}Recommended{% endtrans %}
+            </p>
         </div>
     </div>
 {% endblock %}
