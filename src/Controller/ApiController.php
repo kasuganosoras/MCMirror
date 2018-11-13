@@ -58,8 +58,10 @@ class ApiController extends AbstractController
         $response = null;
 
         if ($option === 'all') {
-            $response = $this->getAll();
-        } else if (\in_array($option, $this->getAll(), true)) {
+            $response = array_map(function (ApplicationInterface $application) {
+                return $application->getName();
+            }, $this->applicationService->getApplications());
+        } else if ($this->applicationService->getApplication($option) !== null) {
             if ($fileName !== null) {
                 $response = $this->getForBuild($option, $fileName);
             } else {
@@ -72,13 +74,6 @@ class ApiController extends AbstractController
         }
 
         return new JsonResponse($response);
-    }
-
-    private function getAll()
-    {
-        return array_map(function (ApplicationInterface $application) {
-            return $application->getName();
-        }, $this->applicationService->getApplications());
     }
 
     private function getForBuild(string $option, string $fileName): array
