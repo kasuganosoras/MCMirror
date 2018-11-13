@@ -28,7 +28,11 @@ class SetLocaleFromCookieSubscriber implements EventSubscriberInterface
             $request->getSession()->set('lang', $locale);
         }
 
-        $request->setLocale($request->getSession()->get('lang', $this->defaultLocale));
+        if (!$request->getSession()->has('lang')) {
+            $request->getSession()->set('lang', $this->defaultLocale);
+        }
+
+        $request->setLocale($request->getSession()->get('lang'));
     }
 
     public static function getSubscribedEvents()

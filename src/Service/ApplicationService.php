@@ -3,6 +3,7 @@
 namespace App\Service;
 
 use App\Application\ApplicationInterface;
+use Symfony\Component\VarDumper\VarDumper;
 
 class ApplicationService
 {
@@ -43,7 +44,7 @@ class ApplicationService
     public function getApplication(string $applicationName)
     {
         foreach ($this->applications as $application) {
-            if ($application->getName() === $applicationName) {
+            if (strtolower($application->getName()) === strtolower($applicationName)) {
                 return $application;
             }
         }

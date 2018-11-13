@@ -7,6 +7,7 @@ use App\Service\ApplicationService;
 use App\Service\BuildsService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -40,7 +41,7 @@ class ApiController extends AbstractController
      * @Route("/", name="index")
      * @return Response
      */
-    public function index(): Response
+    public function indexAction(): Response
     {
         return $this->render('api/index.html.twig', [
             'title' => 'API'
@@ -53,13 +54,15 @@ class ApiController extends AbstractController
      * @param null|string $fileName
      * @return JsonResponse
      */
-    public function list(string $option, ?string $fileName = null): JsonResponse
+    public function listAction(string $option, ?string $fileName = null): JsonResponse
     {
         $response = null;
 
         if ($option === 'all') {
-            $response = $this->getAll();
-        } else if (\in_array($option, $this->getAll(), true)) {
+            $response = array_map(function (ApplicationInterface $application) {
+                return $application->getName();
+            }, $this->applicationService->getApplications());
+        } else if ($this->applicationService->getApplication($option) !== null) {
             if ($fileName !== null) {
                 $response = $this->getForBuild($option, $fileName);
             } else {
@@ -74,11 +77,27 @@ class ApiController extends AbstractController
         return new JsonResponse($response);
     }
 
-    private function getAll()
+    /**
+     * @Route("/file/{applicationName}/{fileName}", name="file")
+     * @param string $applicationName
+     * @param null|string $fileName
+     * @return JsonResponse
+     */
+    public function fileAction(string $applicationName, string $fileName): JsonResponse
     {
-        return array_map(function (ApplicationInterface $application) {
-            return $application->getName();
-        }, $this->applicationService->getApplications());
+        $response = null;
+
+        $application = $this->applicationService->getApplication($applicationName);
+
+        if (null === $application) {
+            throw $this->createNotFoundException(sprintf('Could not find Application %s', $applicationName));
+        }
+
+        if (!$this->buildsService->doesBuildExist($application, $fileName)) {
+            throw $this->createNotFoundException(sprintf('Could not find File %s for Application %s', $fileName, $fileName));
+        }
+
+        return new JsonResponse($this->buildsService->getBuildForApplication($application, $fileName));
     }
 
     private function getForBuild(string $option, string $fileName): array
