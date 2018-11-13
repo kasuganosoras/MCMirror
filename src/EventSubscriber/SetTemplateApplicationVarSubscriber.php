@@ -17,11 +17,16 @@ class SetTemplateApplicationVarSubscriber implements EventSubscriberInterface
      * @var Environment
      */
     private $environment;
+    /**
+     * @var iterable
+     */
+    private $availableLanguages;
 
-    public function __construct(ApplicationService $applicationService, Environment $environment)
+    public function __construct(ApplicationService $applicationService, Environment $environment, iterable $availableLanguages)
     {
         $this->applicationService = $applicationService;
         $this->environment = $environment;
+        $this->availableLanguages = $availableLanguages;
     }
 
     public static function getSubscribedEvents()
@@ -35,5 +40,6 @@ class SetTemplateApplicationVarSubscriber implements EventSubscriberInterface
     {
         $this->environment->addGlobal('sortedApplications', $this->applicationService->getApplicationOrderedByCategory());
         $this->environment->addGlobal('allApplications', $this->applicationService->getApplications());
+        $this->environment->addGlobal('availableLanguages', $this->availableLanguages);
     }
 }

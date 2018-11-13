@@ -14,15 +14,15 @@ class ApplicationService
     /**
      * @var array
      */
-    private $categoryOrder;
+    private $categories;
 
     /**
      * ApplicationService constructor.
      *
      * @param iterable $applications
-     * @param array $categoryOrder
+     * @param array $categories
      */
-    public function __construct(iterable $applications, array $categoryOrder)
+    public function __construct(iterable $applications, array $categories)
     {
         $this->applications = [];
 
@@ -30,7 +30,7 @@ class ApplicationService
             $this->applications[] = $application;
         }
 
-        $this->categoryOrder = $categoryOrder;
+        $this->categories = $categories;
     }
 
     /**
@@ -44,7 +44,7 @@ class ApplicationService
     public function getApplication(string $applicationName)
     {
         foreach ($this->applications as $application) {
-            if ($application->getName() === $applicationName) {
+            if (strtolower($application->getName()) === strtolower($applicationName)) {
                 return $application;
             }
         }
@@ -55,7 +55,7 @@ class ApplicationService
     public function getApplicationOrderedByCategory(): array
     {
         $orderedApplications = [];
-        foreach ($this->getCategoriesInOrder() as $category) {
+        foreach ($this->categories as $category) {
             $orderedApplications[$category] = [];
         }
 
@@ -68,30 +68,6 @@ class ApplicationService
 
     public function getCategories(): array
     {
-        return array_map(function (ApplicationInterface $application) {
-            return $application->getCategory();
-        }, $this->getApplications());
-    }
-
-    public function getCategoriesInOrder(): array //TODO: This could be offloaded to a CompilerPass I think
-    {
-        $orderedCategories = [];
-        $categories = $this->getCategories();
-
-        foreach ($this->categoryOrder as $orderKey => $orderCategory)  {
-            if (\in_array($orderCategory, $categories, true)) {
-                $orderedCategories[$orderKey] = $orderCategory;
-            }
-        }
-        foreach ($categories as $key => $category) {
-            if (\in_array($category, $this->categoryOrder, true)) {
-                unset($categories[$key]);
-                continue;
-            }
-
-            $orderedCategories[] = $category;
-        }
-
-        return $orderedCategories;
+        return $this->categories;
     }
 }

@@ -2,9 +2,9 @@
     "recommended": false,
     "abandoned": false,
     "external": true,
-    "url": "http:\/\/ci.lilypadmc.org\/",
-    "name": "Lilypad",
-    "category": "Proxies",
+    "url": "https:\/\/cuberite.org/",
+    "name": "Cuberite",
+    "category": "Alternative",
     "officialLinks": {},
     "versionRegex": [
         "\/[a-zA-Z]+-([0-9.]+)\\..*\/",
