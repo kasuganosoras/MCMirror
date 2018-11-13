@@ -30,3 +30,8 @@ You can start the Website with PHP-PM, but currently it does not like the genera
 ```
 php bin/console server:run
 ```
+
+Also you can customize the server port, as example port 8080:
+```
+php bin/console server:run 0.0.0.0:8080
+```
