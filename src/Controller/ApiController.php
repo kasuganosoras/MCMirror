@@ -81,9 +81,9 @@ class ApiController extends AbstractController
      * @Route("/file/{applicationName}/{fileName}", name="file")
      * @param string $applicationName
      * @param null|string $fileName
-     * @return RedirectResponse
+     * @return JsonResponse
      */
-    public function fileAction(string $applicationName, string $fileName): RedirectResponse
+    public function fileAction(string $applicationName, string $fileName): JsonResponse
     {
         $response = null;
 
@@ -97,7 +97,7 @@ class ApiController extends AbstractController
             throw $this->createNotFoundException(sprintf('Could not find File %s for Application %s', $fileName, $fileName));
         }
 
-        return new RedirectResponse($this->buildsService->getBuildForApplication($application, $fileName)['downloadUrl']);
+        return new JsonResponse($this->buildsService->getBuildForApplication($application, $fileName));
     }
 
     private function getForBuild(string $option, string $fileName): array
