@@ -22,4 +22,12 @@ Info: Informazioni
 'Example usage': 'Esempio di utilizzo'
 'Real world usage for grabbing the list of files for %applicationName%.': 'Esempio d''utilizzo per ottenere la lista dei file relativi a %applicationName%.'
 'Real world usage for requesting information about %buildName%.': 'Esempio d''utilizzo per ottenere le informazioni relative a %buildName%.'
+'Vanilla': 'Vanilla'
+'Forge': 'Forge'
+'Proxies': 'Proxies'
+'Pocket Edition': 'Pocket Edition'
+'Multi-Threaded': 'Multi-Threaded'
+'Mods': 'Mods'
+'APIs': 'APIs'
+'Alternative': 'Alternative'
 languageName: Italiano
