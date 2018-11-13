@@ -3,7 +3,6 @@
 namespace App\Service;
 
 use App\Application\ApplicationInterface;
-use Symfony\Component\VarDumper\VarDumper;
 
 class ApplicationService
 {
@@ -61,6 +60,30 @@ class ApplicationService
 
         foreach ($this->applications as $application) {
             $orderedApplications[$application->getCategory()][] = $application;
+        }
+
+        foreach ($orderedApplications as $categoryName => &$applications) {
+            usort($applications, function (ApplicationInterface $applicationA, ApplicationInterface $applicationB) {
+
+                $i = 0;
+                if ($applicationA->isRecommended() && !$applicationB->isRecommended()) {
+                    $i--;
+                }
+
+                if (!$applicationA->isRecommended() && $applicationB->isRecommended()) {
+                    $i++;
+                }
+
+                if (!$applicationA->isAbandoned() && $applicationB->isAbandoned()) {
+                    $i--;
+                }
+
+                if ($applicationA->isAbandoned() && !$applicationB->isAbandoned()) {
+                    $i++;
+                }
+
+                return $i;
+            });
         }
 
         return $orderedApplications;
