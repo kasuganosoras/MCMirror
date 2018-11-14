@@ -63,7 +63,7 @@ class GrabController extends AbstractController
         $this->downloadCounter->increaseCounter($application, $build);
 
         return $this->render('grab/index.html.twig', [
-            'title' => 'Download '.$fileName,
+            'title' => 'Download ' . $fileName,
             'application' => $application,
             'filename' => $fileName,
         ]);

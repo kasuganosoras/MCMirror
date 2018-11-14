@@ -6,7 +6,6 @@ namespace App\Service;
 
 use App\Application\ApplicationInterface;
 use App\Structs\BuildInterface;
-use Symfony\Component\VarDumper\VarDumper;
 
 class DownloadCounterService
 {
@@ -47,6 +46,24 @@ class DownloadCounterService
             return 0;
         }
 
-        return $this->downloadCounter->getCounter($application, $build);
+        return $this->downloadCounter->getCount($application, $build);
+    }
+
+    public function getCountForApplication(ApplicationInterface $application): int
+    {
+        if ($this->downloadCounter === null) {
+            return 0;
+        }
+
+        return $this->downloadCounter->getCountForApplication($application);
+    }
+
+    public function getTotalCount(): int
+    {
+        if ($this->downloadCounter === null) {
+            return 0;
+        }
+
+        return $this->downloadCounter->getTotalCount();
     }
 }

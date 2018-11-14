@@ -15,5 +15,9 @@ interface DownloadCounterInterface
 
     public function increaseCounter(ApplicationInterface $application, BuildInterface $build): void;
 
-    public function getCounter(ApplicationInterface $application, BuildInterface $build): int;
+    public function getCount(ApplicationInterface $application, BuildInterface $build): int;
+
+    public function getCountForApplication(ApplicationInterface $application): int;
+
+    public function getTotalCount(): int;
 }
