@@ -6,13 +6,13 @@
     {% endfor %}
     <div class="column is-full columns is-multiline">
         <div class="column is-4">
+            <p><span class="tag is-success"><i class="fas fa-star"></i></span> - {% trans %}Recommended{% endtrans %}</p>
+        </div>
+        <div class="column is-4">
             <p><span class="tag is-info">{% trans %}External{% endtrans %}</span> - {% trans %}Outgoing link to an external download location.{% endtrans %}</p>
         </div>
         <div class="column is-4">
             <p><span class="tag is-danger">{% trans %}Abandoned{% endtrans %}</span> - {% trans %}Project was abandoned by its developers.{% endtrans %}</p>
-        </div>
-        <div class="column is-4">
-            <p><span class="tag is-success"><i class="fas fa-star"></i></span> - {% trans %}Recommended{% endtrans %}</p>
         </div>
     </div>
 {% endblock %}
