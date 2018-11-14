@@ -4,7 +4,7 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
-    locale: 'en'
+  locale: 'en'
 
 services:
   # default configuration for services in *this* file
@@ -18,11 +18,15 @@ services:
       $defaultLocale: '%locale%'
       $availableLanguages: '%app.availableLanguages%'
 
+  _instanceof:
+    App\Service\DownloadCounterInterface:
+      tags: ['app.downloadCounter']
+
   # makes classes in src/ available to be used as services
   # this creates a service per class whose id is the fully-qualified class name
   App\:
     resource: '../src/*'
-    exclude: '../src/{DependencyInjection,Entity,Migrations,Tests,Kernel.php,Application}'
+    exclude: '../src/{DependencyInjection,Entity,Migrations,Tests,Kernel.php,Application,Struct}'
 
   # controllers are imported separately to make sure services can be injected
   # as action arguments even if you don't extend any base controller class
@@ -30,6 +34,8 @@ services:
     resource: '../src/Controller'
     tags: ['controller.service_arguments']
 
+  App\Service\DownloadCounterService:
+    arguments: [!tagged app.downloadCounter]
 
   App\Service\ApplicationService:
     arguments: [!tagged app.application, '%application.categories%']

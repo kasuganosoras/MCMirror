@@ -60,15 +60,17 @@
                             <th>{% trans %}Version{% endtrans %}</th>
                             <th>{% trans %}Size{% endtrans %}</th>
                             <th>{% trans %}Date{% endtrans %}</th>
+                            <th>{% trans %}Count{% endtrans %}</th>
                             <th>{% trans %}Download{% endtrans %}</th>
                         </tr>
                         </thead>
                         {% for build in builds %}
                             <tr>
                                 <td>{{ build.fileName }}</td>
-                                <td class="mcversion" rel="{{ build.version }}">{{ build.version }}</td>
-                                <td>{{ build.size }}</td>
-                                <td>{{ build.date }}</td>
+                                <td class="mcversion" rel="{{ build.minecraftVersion }}">{{ build.minecraftVersion }}</td>
+                                <td>{{ build.humanSize }}</td>
+                                <td>{{ build.humanDate }}</td>
+                                <td>{{ build.downloadCounter }}</td>
                                 <td>
                                     <a class="button is-info"
                                        href="{{ url('grab', {'applicationName': application.name, 'fileName': build.fileName}) }}">{% trans %}Download{% endtrans %}</a>

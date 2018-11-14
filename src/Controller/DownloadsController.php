@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Service\ApplicationService;
 use App\Service\BuildsService;
+use App\Structs\BuildInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -57,12 +58,12 @@ class DownloadsController extends AbstractController
 
         $builds = $this->buildsService->getBuildsForApplication($application);
 
-        usort($builds, function ($a, $b) {
-            return strnatcmp($b['version'], $a['version']);
+        usort($builds, function (BuildInterface $a, BuildInterface $b) {
+            return strnatcmp($b->getMinecraftVersion(), $a->getMinecraftVersion());
         });
 
-        $versions = array_unique(array_map(function ($build) {
-            return $build['version'];
+        $versions = array_unique(array_map(function (BuildInterface $build) {
+            return $build->getMinecraftVersion();
         }, $builds));
 
         usort($versions, function ($a, $b) {
