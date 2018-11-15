@@ -3,6 +3,8 @@
 namespace App\Service;
 
 use App\Application\ApplicationInterface;
+use App\Structs\Build;
+use App\Structs\BuildInterface;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Finder\SplFileInfo;
 use Symfony\Component\Routing\RouterInterface;
@@ -13,17 +15,27 @@ class BuildsService
      * @var RouterInterface
      */
     private $router;
+    /**
+     * @var DownloadCounterService
+     */
+    private $downloadCounter;
 
     /**
      * BuildsService constructor.
      *
      * @param RouterInterface $router
+     * @param DownloadCounterService $downloadCounter
      */
-    public function __construct(RouterInterface $router)
+    public function __construct(RouterInterface $router, DownloadCounterService $downloadCounter)
     {
         $this->router = $router;
+        $this->downloadCounter = $downloadCounter;
     }
 
+    /**
+     * @param ApplicationInterface $application
+     * @return BuildInterface[]
+     */
     public function getBuildsForApplication(ApplicationInterface $application): array
     {
         $applicationPath = $this->getPathForApplication($application);
@@ -39,68 +51,28 @@ class BuildsService
         return $builds;
     }
 
-    public function getBuildForApplication(ApplicationInterface $application, string $fileName): array
+    public function getBuildForApplication(ApplicationInterface $application, string $fileName): BuildInterface
     {
         return $this->getBuildForFile($application, $this->getSplFile($application, $fileName));
     }
 
-    private function getBuildForFile(ApplicationInterface $application, SplFileInfo $file): array
+    private function getBuildForFile(ApplicationInterface $application, SplFileInfo $file): BuildInterface
     {
-        $versionRegex = $application->getVersionRegex();
-
-        if (!\is_array($versionRegex)) {
-            $versionRegex = [$versionRegex];
-        }
-
-
-        $version = null;
-        foreach ($application->getVersionGroupOverride() as $group => $regex) {
-            if (preg_match($regex, $file->getFilename()) === 1) {
-                $version = $group;
-                break;
-            }
-        }
-
-        if ($version === null) {
-            foreach ($versionRegex as $regex) {
-                preg_match($regex, $file->getFilename(), $version);
-
-                if (isset($version[1])) {
-                    $version = $version[1];
-                    break;
-                }
-            }
-        }
-
-        if ($version === null || \is_array($version)) {
-            $version = $file->getBasename();
-        }
-
-        return [
+        $directLink = $this->router->generate('files', [
+            'applicationName' => $application->getName(),
             'fileName' => $file->getFilename(),
-            'version' => $version,
-            'size' => $file->getSize(),
-            'date' => date('Y-m-d', $file->getMTime()),
-            'downloadUrl' => $this->router->generate('files', [
-                'applicationName' => $application->getName(),
-                'fileName' => $file->getFilename(),
-            ], RouterInterface::ABSOLUTE_URL),
+        ], RouterInterface::ABSOLUTE_URL);
 
+        $grabLink = $this->router->generate('grab', [
+            'applicationName' => $application->getName(),
+            'fileName' => $file->getFilename(),
+        ], RouterInterface::ABSOLUTE_URL);
 
-            'size_bytes' => $file->getSize(),
-            'size_human' => $this->getHumanFilesize($file->getSize()),
-            'date_epoch' => $file->getMTime(),
-            'date_human' => date('F d, Y', $file->getMTime()),
-            'mc_version' => $version,
-            'direct_link' => $this->router->generate('files', [
-                'applicationName' => $application->getName(),
-                'fileName' => $file->getFilename(),
-            ], RouterInterface::ABSOLUTE_URL),
-            'grab_link' => $this->router->generate('grab', [
-                'applicationName' => $application->getName(),
-                'fileName' => $file->getFilename(),
-            ], RouterInterface::ABSOLUTE_URL),
-        ];
+        $build = new Build($application, $file, $directLink, $grabLink);
+
+        $build->setDownloadCounter($this->downloadCounter->getCounter($application, $build));
+
+        return $build;
     }
 
     public function getPathForBuild(ApplicationInterface $application, string $fileName): string
@@ -132,12 +104,5 @@ class BuildsService
         }
 
         return null;
-    }
-
-    private function getHumanFilesize($bytes, $decimals = 2)
-    {
-        $sz = 'BKMGTP';
-        $factor = (int)floor((\strlen($bytes) - 1) / 3);
-        return sprintf("%.{$decimals}f", $bytes / (1024 ** $factor)) . @$sz[$factor];
     }
 }

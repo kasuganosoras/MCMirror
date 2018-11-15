@@ -6,6 +6,7 @@
     "ext-ctype": "*",
     "ext-iconv": "*",
     "ext-json": "*",
+    "ramsey/uuid": "^3.8",
     "sensio/framework-extra-bundle": "^5.2",
     "symfony/asset": "*",
     "symfony/console": "*",

@@ -11,15 +11,15 @@
         <span class="is-pulled-right">
 
                     {% if application.isRecommended %}
-                        <span class="tag is-success "><i class="fas fa-star"></i></span>
+                        <span class="tag is-success " rel="recommended"><i class="fas fa-star"></i></span>
                     {% endif %}
 
             {% if application.isAbandoned %}
-                <span class="tag is-danger">{% trans %}Abandoned{% endtrans %}</span>
+                <span class="tag is-danger" rel="abandoned">{% trans %}Abandoned{% endtrans %}</span>
             {% endif %}
 
             {% if application.isExternal %}
-                <span class="tag is-info">{% trans %}External{% endtrans %}</span>
+                <span class="tag is-info" rel="external">{% trans %}External{% endtrans %}</span>
             {% endif %}
 
                 </span>

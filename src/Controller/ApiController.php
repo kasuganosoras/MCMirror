@@ -5,9 +5,9 @@ namespace App\Controller;
 use App\Application\ApplicationInterface;
 use App\Service\ApplicationService;
 use App\Service\BuildsService;
+use App\Service\DownloadCounterService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -24,16 +24,22 @@ class ApiController extends AbstractController
      * @var BuildsService
      */
     private $buildsService;
+    /**
+     * @var DownloadCounterService
+     */
+    private $downloadCounter;
 
     /**
      * ApiController constructor.
      * @param ApplicationService $applicationService
      * @param BuildsService $buildsService
+     * @param DownloadCounterService $downloadCounter
      */
-    public function __construct(ApplicationService $applicationService, BuildsService $buildsService)
+    public function __construct(ApplicationService $applicationService, BuildsService $buildsService, DownloadCounterService $downloadCounter)
     {
         $this->applicationService = $applicationService;
         $this->buildsService = $buildsService;
+        $this->downloadCounter = $downloadCounter;
     }
 
 
@@ -63,11 +69,7 @@ class ApiController extends AbstractController
                 return $application->getName();
             }, $this->applicationService->getApplications());
         } else if ($this->applicationService->getApplication($option) !== null) {
-            if ($fileName !== null) {
-                $response = $this->getForBuild($option, $fileName);
-            } else {
-                $response = $this->getForApplication($option);
-            }
+            $response = $this->getForApplication($option);
         }
 
         if ($response === null) {
@@ -97,18 +99,11 @@ class ApiController extends AbstractController
             throw $this->createNotFoundException(sprintf('Could not find File %s for Application %s', $fileName, $fileName));
         }
 
-        return new JsonResponse($this->buildsService->getBuildForApplication($application, $fileName));
-    }
+        $build = $this->buildsService->getBuildForApplication($application, $fileName);
 
-    private function getForBuild(string $option, string $fileName): array
-    {
-        $application = $this->applicationService->getApplication($option);
+        $this->downloadCounter->increaseCounter($application, $build);
 
-        if (!$this->buildsService->doesBuildExist($application, $fileName)) {
-            throw $this->createNotFoundException(sprintf('Could not find File %s for Application %s', $fileName, $option));
-        }
-
-        return $this->buildsService->getBuildForApplication($application, $fileName);
+        return new JsonResponse($build->getApiAnswer());
     }
 
     private function getForApplication(string $applicationName)

@@ -33,7 +33,18 @@ $(document).ready(function () {
             $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
         });
     });
+
     $('.dropdown').click(function() {
         $(this).toggleClass("is-active");
+    });
+
+    $('.is-filter').click(function() {
+        $(this).toggleClass("is-focused");
+
+        if ($(this).hasClass('is-focused')) {
+            $('.panel-block > span > span[rel="' + $(this).attr('rel') + '"]').parent().parent().show();
+        } else {
+            $('.panel-block > span > span[rel="' + $(this).attr('rel') + '"]').parent().parent().hide();
+        }
     });
 });
