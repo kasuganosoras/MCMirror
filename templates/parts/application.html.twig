@@ -1,4 +1,4 @@
-<p class="panel-heading">{{ category|trans }}</p>
+<p class="panel-heading has-text-weight-semibold">{{ category }}</p>
 {% for application in applications %}
 
     {% if application.isExternal %}
@@ -10,9 +10,9 @@
     <a class="panel-block" href="{{ url }}">{{ application.name }}
         <span class="is-pulled-right">
 
-                    {% if application.isRecommended %}
-                        <span class="tag is-success " rel="recommended"><i class="fas fa-star"></i></span>
-                    {% endif %}
+            {% if application.isRecommended %}
+                <span class="tag is-success "><i class="fas fa-star"></i></span>
+            {% endif %}
 
             {% if application.isAbandoned %}
                 <span class="tag is-danger" rel="abandoned">{% trans %}Abandoned{% endtrans %}</span>
@@ -22,6 +22,6 @@
                 <span class="tag is-info" rel="external">{% trans %}External{% endtrans %}</span>
             {% endif %}
 
-                </span>
+        </span>
     </a>
 {% endfor %}
