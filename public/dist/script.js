@@ -42,9 +42,10 @@ $(document).ready(function () {
         $(this).toggleClass("is-focused");
 
         if ($(this).hasClass('is-focused')) {
-            $('.panel-block > span > span[rel="' + $(this).attr('rel') + '"]').parent().parent().show();
+            $('.application').hide();
+            $('.application.panel-block > span > span[rel="' + $(this).attr('rel') + '"]').parent().parent().show();
         } else {
-            $('.panel-block > span > span[rel="' + $(this).attr('rel') + '"]').parent().parent().hide();
+            $('.application.panel-block > span > span').parent().parent().show();
         }
     });
 });
