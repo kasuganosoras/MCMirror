@@ -1,6 +1,6 @@
 # MC Mirror
 ![Lines of code](https://tokei.rs/b1/github/MCMirror/MCMirror?category=code)
-![Files](https://tokei.rs/b1/github/AuthMe/AuthMeReloaded?category=files)
+![Files](https://tokei.rs/b1/github/MCMirror/MCMirror?category=files)
 [![Maintainability](https://api.codeclimate.com/v1/badges/961f59c5aff8d3c046df/maintainability)](https://codeclimate.com/github/MCMirror/MCMirror/maintainability)
 
 ## Support

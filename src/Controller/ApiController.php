@@ -6,6 +6,7 @@ use App\Application\ApplicationInterface;
 use App\Service\ApplicationService;
 use App\Service\BuildsService;
 use App\Service\DownloadCounterService;
+use App\Structs\Build;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -108,8 +109,8 @@ class ApiController extends AbstractController
 
     private function getForApplication(string $applicationName)
     {
-        return array_map(function (array $build) {
-            return $build['fileName'];
+        return array_map(function (Build $build) {
+            return $build->getFileName();
         }, $this->buildsService->getBuildsForApplication($this->applicationService->getApplication($applicationName)));
     }
 }

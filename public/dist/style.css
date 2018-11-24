@@ -46,8 +46,18 @@
     color: #363636;
 }
 
-.title a {
-    color: inherit;
+@media screen and (max-width: 1087px) {
+    .hero.is-primary .navbar-menu {
+        background-color: #209cee;
+    }
+    .hero.is-primary .navbar-dropdown,
+    .hero.is-primary .navbar-dropdown a.navbar-item:hover {
+        color: white;
+    }
+}
+
+.title {
+    font-size: 4rem;
 }
 .footer {
     padding: 30px;

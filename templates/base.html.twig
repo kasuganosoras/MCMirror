@@ -19,6 +19,7 @@
     {% endblock %}
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css" integrity="sha256-2pUeJf+y0ltRPSbKOeJh09ipQFYxUdct5nTY6GAXswA=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.css" integrity="sha256-gVCm5mRCmW9kVgsSjQ7/5TLtXqvfCoxhdsjE6O1QLm8=" crossorigin="anonymous" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ asset('dist/style.css') }}"/>
 </head>
@@ -27,9 +28,12 @@
 <section class="hero is-primary" style="background-repeat: no-repeat;background-size: cover;background: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url({{ asset('/dist/header.jpg') }});background-position: center;">
     <div class="hero-body">
         <div class="container has-text-centered">
-            <h1 class="title is-2">{{ env('WEBSITE_NAME')|trans }}</h1>
-            <h2 class="subtitle">{% trans %}continuation of Yives Mirror{% endtrans %}</h2>
-            <h2 class="subtitle">{% trans %}Minecraft Server Software File Mirror{% endtrans %}</h2>
+            <h1 class="title">{{ env('WEBSITE_NAME')|trans }}</h1>
+            <h2 class="subtitle">
+                <span>{% trans %}The future of Yives Mirror{% endtrans %}</span>
+                <br />
+                <span>{% trans %}A Minecraft server software File Mirror{% endtrans %}</span>
+            </h2>
         </div>
     </div>
     <div class="hero-foot">
@@ -47,7 +51,7 @@
                         <a class="navbar-link">
                             <span>{{ availableLanguages[app.request.session.get('lang')] }}</span>
                         </a>
-                        <div class="navbar-dropdown is-size-6">
+                        <div class="navbar-dropdown animated fadeIn is-size-6">
                             {% for languageKey,languageName in availableLanguages %}
                                 {% if app.request.session.get('lang') != languageKey %}
                                     <a href="{{ path(app.request.attributes.get('_route'),  app.request.attributes.get('_route_params')|merge({'lang': languageKey})) }}" class="navbar-item">
@@ -84,12 +88,12 @@
 </section>
 <footer class="footer">
     <div class="container">
-        <div class="content has-text-centered">
+        <div class="content has-text-centered has-text-weight-semibold">
             <p>{% trans with {'%websiteName%': env('WEBSITE_NAME')|trans } %}%websiteName% is not affliated with Mojang nor any of the software hosted here.{% endtrans %}</p>
         </div>
     </div>
 </footer>
-<div class="modal" id="downloads-modal">
+<div class="modal animated fadeIn" id="downloads-modal">
     <div class="modal-background close-modal" data-modal-id="#downloads-modal"></div>
     <div class="modal-content">
         <nav class="panel">
@@ -97,12 +101,12 @@
                 {% include 'parts/application.html.twig' with {'applications': applications, 'category': category} only %}
             {% endfor %}
             <div class="panel-block">
+                <p><span class="tag is-success"><i class="fas fa-star"></i></span>
+                    - {% trans %}Recommended{% endtrans %}</p>
                 <p><span class="tag is-info">{% trans %}External{% endtrans %}</span>
                     - {% trans %}Outgoing link to an external download location.{% endtrans %}</p>
                 <p><span class="tag is-danger">{% trans %}Abandoned{% endtrans %}</span>
                     - {% trans %}Project was abandoned by its developers.{% endtrans %}</p>
-                <p><span class="tag is-success"><i class="fas fa-star"></i></span>
-                    - {% trans %}Recommended{% endtrans %}</p>
             </div>
         </nav>
     </div>
