@@ -38,14 +38,26 @@ $(document).ready(function () {
         $(this).toggleClass("is-active");
     });
 
+    var filter = [];
     $('.is-filter').click(function() {
         $(this).toggleClass("is-focused");
 
         if ($(this).hasClass('is-focused')) {
-            $('.application').hide();
-            $('.application.panel-block > span > span[rel="' + $(this).attr('rel') + '"]').parent().parent().show();
+            filter.push($(this).attr('rel'));
         } else {
-            $('.application.panel-block > span > span').parent().parent().show();
+            var index = filter.indexOf($(this).attr('rel'));
+            if (index > -1) {
+                filter.splice(index, 1);
+            }
+        }
+
+        if (filter.length > 0) {
+            $('.application').hide();
+            for (var i in filter) {
+                $('.application.panel-block > span > span[rel="' + filter[i] + '"]').parent().parent().show();
+            }
+        } else {
+            $('.application').show();
         }
     });
 });
