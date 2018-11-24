@@ -1,13 +1,12 @@
 {
-    "recommended": false,
-    "abandoned": false,
-    "external": true,
-    "url": "https:\/\/ci.nukkitx.com\/job\/NukkitX\/job\/Nukkit\/job\/master\/",
-    "name": "Nukkit",
-    "category": "Pocket Edition",
-    "officialLinks": {},
-    "versionRegex": [
-        "\/[a-zA-Z]+-([0-9.]+)\\..*\/",
-        "\/.*(latest).*\/"
-    ]
+  "recommended": false,
+  "abandoned": false,
+  "external": true,
+  "url": "https:\/\/ci.nukkitx.com\/job\/NukkitX\/job\/Nukkit\/job\/master\/",
+  "name": "Nukkit",
+  "category": "Pocket Edition",
+  "officialLinks": {},
+  "versionRegex": [
+    "\/[a-zA-Z]+-([0-9.]+)-\\w+\\..*\/"
+  ]
 }

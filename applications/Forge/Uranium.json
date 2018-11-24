@@ -1,15 +1,14 @@
 {
-    "recommended": false,
-    "abandoned": false,
-    "external": true,
-    "url": "https://Uraniummc.cc",
-    "name": "Uranium",
-    "category": "Forge",
-    "officialLinks": {},
-    "versionRegex": [
-        "\/[a-zA-Z]+-([0-9.]+)\\..*\/",
-        "\/.*(server).*\/"
-    ],
-    "versionGroupOverride": {
-    }
+  "recommended": false,
+  "abandoned": false,
+  "external": true,
+  "url": "https://Uraniummc.cc",
+  "name": "Uranium",
+  "category": "Forge",
+  "officialLinks": {},
+  "versionRegex": [
+    "\/.*(server).*\/"
+  ],
+  "versionGroupOverride": {
+  }
 }

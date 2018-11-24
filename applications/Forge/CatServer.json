@@ -1,15 +1,14 @@
 {
-    "recommended": false,
-    "abandoned": false,
-    "external": true,
-    "url": "https://github.com/Luohuayu/CatServer",
-    "name": "CatServer",
-    "category": "Forge",
-    "officialLinks": {},
-    "versionRegex": [
-        "\/[a-zA-Z]+-([0-9.]+)\\..*\/",
-        "\/.*(server).*\/"
-    ],
-    "versionGroupOverride": {
-    }
+  "recommended": false,
+  "abandoned": false,
+  "external": true,
+  "url": "https://github.com/Luohuayu/CatServer",
+  "name": "CatServer",
+  "category": "Forge",
+  "officialLinks": {},
+  "versionRegex": [
+    "\/.*(server).*\/"
+  ],
+  "versionGroupOverride": {
+  }
 }
