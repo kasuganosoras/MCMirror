@@ -5,6 +5,7 @@ namespace App\Service;
 use App\Application\ApplicationInterface;
 use App\Structs\Build;
 use App\Structs\BuildInterface;
+use App\Structs\LatestBuild;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Finder\SplFileInfo;
 use Symfony\Component\Routing\RouterInterface;
@@ -19,6 +20,8 @@ class BuildsService
      * @var DownloadCounterService
      */
     private $downloadCounter;
+
+    private static $buildCache = [];
 
     /**
      * BuildsService constructor.
@@ -38,6 +41,27 @@ class BuildsService
      */
     public function getBuildsForApplication(ApplicationInterface $application): array
     {
+        $builds = $this->getBuildsFromFilesystemForApplication($application);
+
+        $latestBuild = $this->getLatestBuildForApplication($application);
+
+        if ($latestBuild !== null) {
+            $builds[] = $latestBuild;
+        }
+
+        return $builds;
+    }
+
+    /**
+     * @param ApplicationInterface $application
+     * @return BuildInterface[]
+     */
+    private function getBuildsFromFilesystemForApplication(ApplicationInterface $application): array
+    {
+        if (isset(static::$buildCache[$application->getName()])) {
+            return static::$buildCache[$application->getName()];
+        }
+
         $applicationPath = $this->getPathForApplication($application);
 
         $finder = new Finder();
@@ -48,11 +72,59 @@ class BuildsService
             $builds[] = $this->getBuildForFile($application, $file);
         }
 
+        static::$buildCache[$application->getName()] = $builds;
+
         return $builds;
+    }
+
+    public function getLatestBuildForApplication(ApplicationInterface $application): ?Build
+    {
+        $builds = $this->getBuildsFromFilesystemForApplication($application);
+
+        /** @var Build $highestVersion */
+        $highestVersion = null;
+        foreach ($builds as $build) {
+            if ($highestVersion !== null) {
+                if ($this->isNewerThan($build->getMinecraftVersion(), $highestVersion->getMinecraftVersion())) {
+                    $highestVersion = $build;
+                }
+            } else {
+                $highestVersion = $build;
+            }
+        }
+
+        if ($highestVersion === null) {
+            return null;
+        }
+
+        return new LatestBuild(
+            $application,
+            $highestVersion->getFile(),
+            $highestVersion->getDirectLink(),
+            $highestVersion->getGrabLink(),
+            $highestVersion->getDownloadCounter()
+        );
+    }
+
+    /**
+     * Returns true if the first Version is higher than the second Version
+     *
+     * @param string $versionA
+     * @param string $versionB
+     * @return bool
+     */
+    private function isNewerThan(string $versionA, string $versionB): bool
+    {
+        return version_compare($versionA, $versionB) === 1;
     }
 
     public function getBuildForApplication(ApplicationInterface $application, string $fileName): BuildInterface
     {
+        $latestBuild = $this->getLatestBuildForApplication($application);
+        if ($latestBuild !== null && $fileName === $latestBuild->getFileName()) {
+            return $latestBuild;
+        }
+
         return $this->getBuildForFile($application, $this->getSplFile($application, $fileName));
     }
 
@@ -87,6 +159,11 @@ class BuildsService
 
     public function doesBuildExist(ApplicationInterface $application, string $fileName): bool
     {
+        $latestBuild = $this->getLatestBuildForApplication($application);
+        if ($latestBuild !== null && $fileName === $latestBuild->getFileName()) {
+            return $latestBuild->getFile() !== null;
+        }
+
         return $this->getSplFile($application, $fileName) !== null;
     }
 

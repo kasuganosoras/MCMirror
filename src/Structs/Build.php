@@ -12,32 +12,32 @@ class Build extends AbstractBuild
     /**
      * @var ApplicationInterface
      */
-    private $application;
+    protected $application;
 
     /**
      * @var SplFileInfo
      */
-    private $file;
+    protected $file;
 
     /**
      * @var string
      */
-    private $directLink;
+    protected $directLink;
 
     /**
      * @var string
      */
-    private $grabLink;
+    protected $grabLink;
 
     /**
      * @var string
      */
-    private $version;
+    protected $version;
 
     /**
      * @var int
      */
-    private $downloadCounter;
+    protected $downloadCounter;
 
     /**
      * Build constructor.
@@ -105,6 +105,11 @@ class Build extends AbstractBuild
     public function setDownloadCounter(int $downloadAmount): void
     {
         $this->downloadCounter = $downloadAmount;
+    }
+
+    public function getFile(): SplFileInfo
+    {
+        return $this->file;
     }
 
     protected function readMinecraftVersion(ApplicationInterface $application, SplFileInfo $file): string

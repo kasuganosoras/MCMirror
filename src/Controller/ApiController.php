@@ -97,7 +97,7 @@ class ApiController extends AbstractController
         }
 
         if (!$this->buildsService->doesBuildExist($application, $fileName)) {
-            throw $this->createNotFoundException(sprintf('Could not find File %s for Application %s', $fileName, $fileName));
+            throw $this->createNotFoundException(sprintf('Could not find File %s for Application %s', $fileName, $applicationName));
         }
 
         $build = $this->buildsService->getBuildForApplication($application, $fileName);

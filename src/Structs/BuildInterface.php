@@ -4,6 +4,8 @@
 namespace App\Structs;
 
 
+use Symfony\Component\Finder\SplFileInfo;
+
 interface BuildInterface
 {
     public function getHumanSize(): string;
@@ -25,4 +27,6 @@ interface BuildInterface
     public function getApiAnswer(): array;
 
     public function getDownloadCounter(): int;
+
+    public function getFile(): SplFileInfo;
 }
