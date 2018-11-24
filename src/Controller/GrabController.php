@@ -65,6 +65,7 @@ class GrabController extends AbstractController
         return $this->render('grab/index.html.twig', [
             'title' => 'Download ' . $fileName,
             'application' => $application,
+            'build' => $build,
             'filename' => $fileName,
         ]);
     }
