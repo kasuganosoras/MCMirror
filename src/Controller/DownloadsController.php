@@ -59,7 +59,13 @@ class DownloadsController extends AbstractController
         $builds = $this->buildsService->getBuildsForApplication($application);
 
         usort($builds, function (BuildInterface $a, BuildInterface $b) {
-            return strnatcmp($b->getMinecraftVersion(), $a->getMinecraftVersion());
+            $i = strcmp((string)$b->getEpochDate(), (string)$a->getEpochDate());
+
+            if (strpos($b->getFileName(), '-latest.jar') !== false) {
+                ++$i;
+            }
+
+            return $i;
         });
 
         $versions = array_unique(array_map(function (BuildInterface $build) {
