@@ -1,8 +1,6 @@
-<?php
-
+<?php declare(strict_types=1);
 
 namespace App\Structs;
-
 
 use Symfony\Component\Finder\SplFileInfo;
 
@@ -17,6 +15,10 @@ interface BuildInterface
     public function getEpochDate(): int;
 
     public function getMinecraftVersion(): string;
+
+    public function getBuildHash(): string;
+
+    public function getBuildDate(): \DateTime;
 
     public function getDirectLink(): string;
 

@@ -1,8 +1,6 @@
-<?php
-
+<?php declare(strict_types=1);
 
 namespace App\Service;
-
 
 use App\Application\ApplicationInterface;
 use App\Structs\BuildInterface;
@@ -16,6 +14,7 @@ class DownloadCounterService
 
     /**
      * DownloadCounterService constructor.
+     *
      * @param iterable $downloadCounters
      */
     public function __construct(iterable $downloadCounters)

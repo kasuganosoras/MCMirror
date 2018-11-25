@@ -6,6 +6,7 @@
     "ext-ctype": "*",
     "ext-iconv": "*",
     "ext-json": "*",
+    "friendsofphp/php-cs-fixer": "^2.13",
     "ramsey/uuid": "^3.8",
     "sensio/framework-extra-bundle": "^5.2",
     "symfony/asset": "*",
@@ -21,7 +22,6 @@
     "symfony/yaml": "*"
   },
   "require-dev": {
-    "friendsofphp/php-cs-fixer": "^2.13",
     "symfony/dotenv": "*"
   },
   "config": {

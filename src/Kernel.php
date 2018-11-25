@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace App;
 
@@ -26,7 +26,7 @@ class Kernel extends BaseKernel
         // be replaced by a call to Application::bootstrapEnv()
 
         for ($i = 0; $i < \count($argv) && '--' !== $v = $argv[$i]; ++$i) {
-            if ('--no-debug' === $v) {
+            if ($v === '--no-debug') {
                 putenv('APP_DEBUG=' . $_SERVER['APP_DEBUG'] = $_ENV['APP_DEBUG'] = '0');
                 $argvUnset[$i] = true;
                 break;
@@ -34,7 +34,7 @@ class Kernel extends BaseKernel
         }
 
         for ($i = 0; $i < \count($argv) && '--' !== $v = $argv[$i]; ++$i) {
-            if (!$v || '-' !== $v[0] || !preg_match('/^-(?:-env(?:=|$)|e=?)(.*)$/D', $v, $v)) {
+            if (!$v || $v[0] !== '-' || !preg_match('/^-(?:-env(?:=|$)|e=?)(.*)$/D', $v, $v)) {
                 continue;
             }
             if (!empty($v[1]) || !empty($argv[1 + $i])) {
@@ -51,7 +51,7 @@ class Kernel extends BaseKernel
 
     public static function bootstrapEnv($env = null)
     {
-        if (null !== $env) {
+        if ($env !== null) {
             putenv('APP_ENV=' . $_SERVER['APP_ENV'] = $env);
         }
 
@@ -66,30 +66,8 @@ class Kernel extends BaseKernel
         }
 
         $_SERVER['APP_ENV'] = $_ENV['APP_ENV'] = isset($_SERVER['APP_ENV']) ? $_SERVER['APP_ENV'] : 'dev';
-        $_SERVER['APP_DEBUG'] = isset($_SERVER['APP_DEBUG']) ? $_SERVER['APP_DEBUG'] : (isset($_ENV['APP_DEBUG']) ? $_ENV['APP_DEBUG'] : 'prod' !== $_SERVER['APP_ENV']);
-        $_SERVER['APP_DEBUG'] = $_ENV['APP_DEBUG'] = (int)$_SERVER['APP_DEBUG'] || filter_var($_SERVER['APP_DEBUG'], FILTER_VALIDATE_BOOLEAN) ? '1' : '0';
-    }
-
-    private static function loadEnv(Dotenv $dotenv, $path)
-    {
-        $dotenv->load($path);
-
-        if (null === $env = isset($_SERVER['APP_ENV']) ? $_SERVER['APP_ENV'] : (isset($_ENV['APP_ENV']) ? $_ENV['APP_ENV'] : null)) {
-            $dotenv->populate(['APP_ENV' => $env = 'dev']);
-        }
-
-        if ('test' !== $env && file_exists($p = "$path.local")) {
-            $dotenv->load($p);
-            $env = isset($_SERVER['APP_ENV']) ? $_SERVER['APP_ENV'] : (isset($_ENV['APP_ENV']) ? $_ENV['APP_ENV'] : $env);
-        }
-
-        if (file_exists($p = "$path.$env")) {
-            $dotenv->load($p);
-        }
-
-        if (file_exists($p = "$path.$env.local")) {
-            $dotenv->load($p);
-        }
+        $_SERVER['APP_DEBUG'] = isset($_SERVER['APP_DEBUG']) ? $_SERVER['APP_DEBUG'] : (isset($_ENV['APP_DEBUG']) ? $_ENV['APP_DEBUG'] : $_SERVER['APP_ENV'] !== 'prod');
+        $_SERVER['APP_DEBUG'] = $_ENV['APP_DEBUG'] = (int) $_SERVER['APP_DEBUG'] || filter_var($_SERVER['APP_DEBUG'], FILTER_VALIDATE_BOOLEAN) ? '1' : '0';
     }
 
     public function getCacheDir()
@@ -137,5 +115,27 @@ class Kernel extends BaseKernel
         $routes->import($confDir . '/{routes}/*' . self::CONFIG_EXTS, '/', 'glob');
         $routes->import($confDir . '/{routes}/' . $this->environment . '/**/*' . self::CONFIG_EXTS, '/', 'glob');
         $routes->import($confDir . '/{routes}' . self::CONFIG_EXTS, '/', 'glob');
+    }
+
+    private static function loadEnv(Dotenv $dotenv, $path)
+    {
+        $dotenv->load($path);
+
+        if (null === $env = isset($_SERVER['APP_ENV']) ? $_SERVER['APP_ENV'] : (isset($_ENV['APP_ENV']) ? $_ENV['APP_ENV'] : null)) {
+            $dotenv->populate(['APP_ENV' => $env = 'dev']);
+        }
+
+        if ($env !== 'test' && file_exists($p = "$path.local")) {
+            $dotenv->load($p);
+            $env = isset($_SERVER['APP_ENV']) ? $_SERVER['APP_ENV'] : (isset($_ENV['APP_ENV']) ? $_ENV['APP_ENV'] : $env);
+        }
+
+        if (file_exists($p = "$path.$env")) {
+            $dotenv->load($p);
+        }
+
+        if (file_exists($p = "$path.$env.local")) {
+            $dotenv->load($p);
+        }
     }
 }

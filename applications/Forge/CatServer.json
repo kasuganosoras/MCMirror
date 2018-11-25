@@ -6,9 +6,7 @@
   "name": "CatServer",
   "category": "Forge",
   "officialLinks": {},
-  "versionRegex": [
-    "\/.*(server).*\/"
-  ],
+
   "versionGroupOverride": {
   }
 }

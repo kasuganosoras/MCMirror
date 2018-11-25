@@ -6,9 +6,6 @@
   "name": "CraftBukkit",
   "category": "Vanilla",
   "officialLinks": {},
-  "versionRegex": [
-    "\/[a-zA-Z]+-([0-9.]+)-\\w+\\..*\/"
-  ],
   "versionGroupOverride": {
     "legacy": "/[a-zA-Z]-[0-9]+-[a-z0-9]+.jar/"
   }

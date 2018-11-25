@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace App\Application;
 
@@ -17,11 +17,4 @@ interface ApplicationInterface
     public function getCategory(): string;
 
     public function getOfficialLinks(): array;
-
-    /**
-     * @return string|array
-     */
-    public function getVersionRegex();
-
-    public function getVersionGroupOverride(): array;
 }

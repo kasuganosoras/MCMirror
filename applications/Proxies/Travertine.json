@@ -5,8 +5,5 @@
   "url": "https:\/\/papermc.io\/downloads#Travertine",
   "name": "Travertine",
   "category": "Proxies",
-  "officialLinks": {},
-  "versionRegex": [
-    "\/[a-zA-Z]+-([0-9.]+)-\\w+\\..*\/"
-  ]
+  "officialLinks": {}
 }

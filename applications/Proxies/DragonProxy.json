@@ -5,8 +5,5 @@
   "url": "https:\/\/github.com\/DragonetMC\/DragonProxy",
   "name": "DragonProxy",
   "category": "Proxies",
-  "officialLinks": {},
-  "versionRegex": [
-    "\/[a-zA-Z]+-([0-9.]+)-\\w+\\..*\/"
-  ]
+  "officialLinks": {}
 }

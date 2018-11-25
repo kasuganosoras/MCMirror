@@ -5,8 +5,5 @@
   "url": null,
   "name": "MCPC+",
   "category": "Forge",
-  "officialLinks": {},
-  "versionRegex": [
-    "\/[a-zA-Z]+-([0-9.]+)-\\w+\\..*\/"
-  ]
+  "officialLinks": {}
 }

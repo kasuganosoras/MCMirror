@@ -5,8 +5,5 @@
   "url": "https:\/\/www.spongepowered.org\/downloads\/spongeforge",
   "name": "Sponge Forge",
   "category": "Forge",
-  "officialLinks": {},
-  "versionRegex": [
-    "\/[a-zA-Z]+-([0-9.]+)-\\w+\\..*\/"
-  ]
+  "officialLinks": {}
 }

@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace App\Controller;
 
@@ -26,8 +26,9 @@ class FilesController extends AbstractController
     /**
      * FilesController constructor.
      *
-     * @param ApplicationService $applicationService
-     * @param BuildsService      $buildsService
+     * @param ApplicationService     $applicationService
+     * @param BuildsService          $buildsService
+     * @param DownloadCounterService $downloadCounter
      */
     public function __construct(ApplicationService $applicationService, BuildsService $buildsService, DownloadCounterService $downloadCounter)
     {
@@ -48,7 +49,7 @@ class FilesController extends AbstractController
     {
         $application = $this->applicationService->getApplication($applicationName);
 
-        if (null === $application) {
+        if ($application === null) {
             throw $this->createNotFoundException(sprintf('Could not find Application %s', $applicationName));
         }
 

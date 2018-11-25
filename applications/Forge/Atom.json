@@ -6,9 +6,7 @@
   "name": "Atom",
   "category": "Forge",
   "officialLinks": {},
-  "versionRegex": [
-    "\/.*(server).*\/"
-  ],
+
   "versionGroupOverride": {
   }
 }

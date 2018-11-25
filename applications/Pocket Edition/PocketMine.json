@@ -5,8 +5,5 @@
   "url": "https:\/\/github.com\/pmmp\/PocketMine-MP\/releases",
   "name": "PocketMine",
   "category": "Pocket Edition",
-  "officialLinks": {},
-  "versionRegex": [
-    "\/[a-zA-Z]+-([0-9.]+)-\\w+\\..*\/"
-  ]
+  "officialLinks": {}
 }

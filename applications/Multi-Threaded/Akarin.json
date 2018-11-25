@@ -5,8 +5,5 @@
   "url": "https://github.com/Akarin-project/Akarin",
   "name": "Akarin",
   "category": "Multi-Threaded",
-  "officialLinks": {},
-  "versionRegex": [
-    "\/.*(latest).*\/"
-  ]
+  "officialLinks": {}
 }

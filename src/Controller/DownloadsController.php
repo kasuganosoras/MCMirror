@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace App\Controller;
 
@@ -25,7 +25,7 @@ class DownloadsController extends AbstractController
      * DownloadsController constructor.
      *
      * @param ApplicationService $applicationService
-     * @param BuildsService $buildsService
+     * @param BuildsService      $buildsService
      */
     public function __construct(ApplicationService $applicationService, BuildsService $buildsService)
     {
@@ -52,7 +52,7 @@ class DownloadsController extends AbstractController
     {
         $application = $this->applicationService->getApplication($applicationName);
 
-        if (null === $application) {
+        if ($application === null) {
             throw $this->createNotFoundException(sprintf('Could not find Application %s', $applicationName));
         }
 
@@ -71,11 +71,11 @@ class DownloadsController extends AbstractController
         });
 
         return $this->render('downloads/index.html.twig', [
-            'title' => $application->getName() . ' Downloads',
-            'application' => $application,
+            'title'         => $application->getName() . ' Downloads',
+            'application'   => $application,
             'officialLinks' => $application->getOfficialLinks(),
-            'versions' => $versions,
-            'builds' => $builds,
+            'versions'      => $versions,
+            'builds'        => $builds,
         ]);
     }
 }

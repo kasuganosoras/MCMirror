@@ -5,8 +5,5 @@
   "url": null,
   "name": "Paper-API",
   "category": "APIs",
-  "officialLinks": {},
-  "versionRegex": [
-    "\/[a-zA-Z]+-([0-9.]+)-\\w+\\..*\/"
-  ]
+  "officialLinks": {}
 }

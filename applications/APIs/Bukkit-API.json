@@ -5,8 +5,5 @@
   "url": null,
   "name": "Bukkit-API",
   "category": "APIs",
-  "officialLinks": {},
-  "versionRegex": [
-    "\/[a-zA-Z]+-([0-9.]+)-\\w+\\..*\/"
-  ]
+  "officialLinks": {}
 }

@@ -5,8 +5,5 @@
   "url": "http:\/\/ci.lilypadmc.org\/",
   "name": "Lilypad",
   "category": "Proxies",
-  "officialLinks": {},
-  "versionRegex": [
-    "\/[a-zA-Z]+-([0-9.]+)-\\w+\\..*\/"
-  ]
+  "officialLinks": {}
 }

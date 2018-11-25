@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace App\Application;
 
@@ -9,9 +9,9 @@ class JsonApplication implements ApplicationInterface
      */
     private $jsonData;
 
-
     /**
      * JsonApplication constructor.
+     *
      * @param array $jsonData
      */
     public function __construct(array $jsonData)
@@ -52,18 +52,5 @@ class JsonApplication implements ApplicationInterface
     public function getOfficialLinks(): array
     {
         return $this->jsonData['officialLinks'] ?? [];
-    }
-
-    /**
-     * @return string|array
-     */
-    public function getVersionRegex()
-    {
-        return $this->jsonData['versionRegex'];
-    }
-
-    public function getVersionGroupOverride(): array
-    {
-        return $this->jsonData['versionGroupOverride'] ?? [];
     }
 }

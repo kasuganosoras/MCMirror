@@ -10,8 +10,5 @@
     "Documentation": "https:\/\/paper.readthedocs.io\/",
     "JavaDocs": "https:\/\/papermc.io\/javadocs\/",
     "GitHub": "https:\/\/github.com\/PaperMC\/Paper"
-  },
-  "versionRegex": [
-    "\/[a-zA-Z]+-([0-9.]+)-\\w+\\..*\/"
-  ]
+  }
 }

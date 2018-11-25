@@ -1,11 +1,6 @@
-<?php
-
+<?php declare(strict_types=1);
 
 namespace App\Structs;
-
-
-use App\Application\ApplicationInterface;
-use Symfony\Component\Finder\SplFileInfo;
 
 class LatestBuild extends Build
 {
@@ -13,5 +8,4 @@ class LatestBuild extends Build
     {
         return strtolower($this->application->getName()) . '-latest.jar';
     }
-
 }

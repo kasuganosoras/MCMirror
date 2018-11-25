@@ -5,8 +5,5 @@
   "url": null,
   "name": "Taco Spigot",
   "category": "Vanilla",
-  "officialLinks": {},
-  "versionRegex": [
-    "\/[a-zA-Z]+-([0-9.]+)-\\w+\\..*\/"
-  ]
+  "officialLinks": {}
 }

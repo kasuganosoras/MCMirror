@@ -6,9 +6,7 @@
   "name": "Uranium",
   "category": "Forge",
   "officialLinks": {},
-  "versionRegex": [
-    "\/.*(server).*\/"
-  ],
+
   "versionGroupOverride": {
   }
 }
