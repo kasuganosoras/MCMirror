@@ -1,0 +1,12 @@
+{
+  "recommended": true,
+  "abandoned": false,
+  "external": false,
+  "url": null,
+  "name": "Paper",
+  "category": "APIs",
+  "officialLinks": {},
+  "versionRegex": [
+    "\/[a-zA-Z]+-([0-9.]+)-\\w+\\..*\/"
+  ]
+}
