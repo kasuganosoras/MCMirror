@@ -1,9 +1,9 @@
 {
-  "recommended": false,
+  "recommended": true,
   "abandoned": false,
   "external": false,
   "url": null,
-  "name": "Bukkit",
+  "name": "PaperAPI",
   "category": "APIs",
   "officialLinks": {},
   "versionRegex": [
