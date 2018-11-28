@@ -5,8 +5,11 @@ namespace App\Controller;
 use App\Service\ApplicationService;
 use App\Service\BuildsService;
 use App\Service\DownloadCounterService;
+use App\Structs\LatestBuild;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\VarDumper\VarDumper;
 
 class FilesController extends AbstractController
 {
@@ -43,9 +46,9 @@ class FilesController extends AbstractController
      * @param string $applicationName
      * @param string $fileName
      *
-     * @return \Symfony\Component\HttpFoundation\BinaryFileResponse
+     * @return Response
      */
-    public function index(string $applicationName, string $fileName)
+    public function index(string $applicationName, string $fileName): Response
     {
         $application = $this->applicationService->getApplication($applicationName);
 
@@ -59,8 +62,15 @@ class FilesController extends AbstractController
 
         $build = $this->buildsService->getBuildForApplication($application, $fileName);
 
+        if ($build instanceof LatestBuild) {
+            return $this->redirectToRoute('files', [
+                'applicationName' => $applicationName,
+                'fileName' => $build->getFile()->getFilename()
+            ]);
+        }
+
         $this->downloadCounter->increaseCounter($application, $build);
 
-        return $this->file($this->buildsService->getPathForBuild($application, $fileName));
+        return $this->file($build->getFile()->getRealPath());
     }
 }
