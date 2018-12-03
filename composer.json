@@ -1,20 +1,6 @@
 {
   "type": "project",
   "license": "proprietary",
-  "repositories": [
-    {
-      "type":"package",
-      "package": {
-        "name": "fionera/php-pm-httpkernel",
-        "version":"master",
-        "source": {
-          "url": "https://github.com/fionera/php-pm-httpkernel.git",
-          "type": "git",
-          "reference":"master"
-        }
-      }
-    }
-  ],
   "require": {
     "php": "^7.1.3",
     "ext-ctype": "*",
@@ -22,7 +8,7 @@
     "ext-json": "*",
     "cweagans/composer-patches": "^1.6",
     "friendsofphp/php-cs-fixer": "^2.13",
-    "php-pm/httpkernel-adapter": "^1.0",
+    "php-pm/httpkernel-adapter": "dev-master",
     "php-pm/php-pm": "^1.0",
     "ramsey/uuid": "^3.8",
     "sensio/framework-extra-bundle": "^5.2",
@@ -87,9 +73,6 @@
     },
     "enable-patching": true,
     "patches": {
-      "php-pm/httpkernel-adapter": {
-        "Watch changes on files that are resources within the container": "https://patch-diff.githubusercontent.com/raw/php-pm/php-pm-httpkernel/pull/148.patch"
-      }
     }
   }
 }
