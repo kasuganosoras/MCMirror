@@ -1,15 +1,12 @@
-<?php
-
+<?php declare(strict_types=1);
 
 namespace App\Service;
-
 
 use App\Application\ApplicationInterface;
 use App\Structs\BuildInterface;
 
 class RedisDownloadCounter implements DownloadCounterInterface
 {
-
     /** @var \Redis */
     private $redis;
 
@@ -17,7 +14,7 @@ class RedisDownloadCounter implements DownloadCounterInterface
     {
         $this->redis = new \Redis();
         $this->redis->connect(getenv('REDIS_HOST'));
-        $this->redis->setOption(\Redis::OPT_SCAN, \Redis::SCAN_RETRY);
+        $this->redis->setOption(\Redis::OPT_SCAN, (string) \Redis::SCAN_RETRY);
     }
 
     public function getName(): string
@@ -32,17 +29,18 @@ class RedisDownloadCounter implements DownloadCounterInterface
 
     public function getCount(ApplicationInterface $application, BuildInterface $build): int
     {
-        return $this->redis->get($this->getKeyForBuild($application, $build));
-    }
+        $count = $this->redis->get($this->getKeyForBuild($application, $build));
 
-    private function getKeyForBuild(ApplicationInterface $application, BuildInterface $build): string
-    {
-        return 'dl_cnt_' . $application->getName() . '_' . $build->getFileName();
+        if ($count === false) {
+            return 0;
+        }
+
+        return (int) $count;
     }
 
     public function getCountForApplication(ApplicationInterface $application): int
     {
-                $count = 0;
+        $count = 0;
         while ($arr_keys = $this->redis->scan($iterate, $this->getKeyForApplication($application) . '*')) {
             foreach ($arr_keys as $str_key) {
                 $count += $this->redis->get($str_key);
@@ -50,11 +48,6 @@ class RedisDownloadCounter implements DownloadCounterInterface
         }
 
         return $count;
-    }
-
-    private function getKeyForApplication(ApplicationInterface $application): string
-    {
-        return 'dl_cnt_' . $application->getName();
     }
 
     public function getTotalCount(): int
@@ -67,6 +60,16 @@ class RedisDownloadCounter implements DownloadCounterInterface
         }
 
         return $count;
+    }
+
+    private function getKeyForBuild(ApplicationInterface $application, BuildInterface $build): string
+    {
+        return 'dl_cnt_' . $application->getName() . '_' . $build->getFileName();
+    }
+
+    private function getKeyForApplication(ApplicationInterface $application): string
+    {
+        return 'dl_cnt_' . $application->getName();
     }
 
     private function getBaseKey(): string

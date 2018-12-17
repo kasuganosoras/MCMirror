@@ -1,0 +1,43 @@
+'File Download': 'Datei herunterladen'
+Filters: Filter
+'Archive of %applicationName% Builds': 'Archiv von %applicationName% Builds'
+'Official Links': 'Offizielle Links'
+Name: Name
+Version: Version
+Size: Größe
+Date: Datum
+Count: Anzahl
+Download: Herunterladen
+Abandoned: Aufgegeben
+External: Extern
+'Outgoing link to an external download location.': 'Herausführender Link zu einem externen Download-Ort.'
+'Project was abandoned by its developers.': 'Projekt wurde von seinen Entwicklern aufgegeben.'
+Recommended: Empfohlen
+'The future of Yives Mirror': 'Die Zukunft von Yives Mirror'
+'continuation of Yives Mirror': 'Fortführung von Yives Mirror'
+'Minecraft Server Software File Mirror': 'Minecraft Server Software Datei Mirror'
+'A Minecraft server software File Mirror': 'Ein Minecraft Server Software Datei Mirror'
+Home: Home
+Downloads: Downloads
+APIs: APIs
+Discord: Discord
+GitHub: GitHub
+'%websiteName% is not affliated with Mojang nor any of the software hosted here.': '%websiteName% ist weder mit Mojang, noch mit irgendeiner hier zu findende Software verbunden.'
+List: Liste
+All: Alle
+Format: Format
+'Example URL': 'Beispiel URL'
+Info: Info
+'This URL is just for listing the current options.': 'Diese URL zeigt die momentanen Optionen.'
+'Example usage': 'Verwendungsbeispiel'
+'Real world usage for grabbing the list of files for %applicationName%.': 'Realitätsnahe Verwendung um die Dateiliste für %applicationName% anzufragen.'
+File: Datei
+'Real world usage for requesting information about %buildName%.': 'Realitätsnahe Verwendung um Imformationen über %buildName% anzufordern.'
+'Vanilla': 'Vanilla'
+'Forge': 'Forge'
+'Proxies': 'Proxies'
+'Pocket Edition': 'Pocket Edition'
+'Multi-Threaded': 'Multi-Threaded'
+'Mods': 'Mods'
+'Alternative': 'Alternative'
+languageName: Deutsch

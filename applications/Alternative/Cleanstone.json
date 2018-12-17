@@ -4,10 +4,6 @@
   "external": true,
   "url": "https://github.com/CleanstoneMC/Cleanstone",
   "name": "Cleanstone",
-  "category": "Multi-Threaded",
-  "officialLinks": {},
-  "versionRegex": [
-    "\/[a-zA-Z]+-([0-9.]+)\\..*\/",
-    "\/.*(latest).*\/"
-  ]
+  "category": "Alternative",
+  "officialLinks": {}
 }

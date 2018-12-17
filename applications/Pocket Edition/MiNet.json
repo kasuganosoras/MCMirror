@@ -1,13 +1,9 @@
 {
-    "recommended": true,
-    "abandoned": false,
-    "external": true,
-    "url": "https:\/\/ci.appveyor.com\/project\/NiclasOlofsson\/MiNET\/branch\/master\/artifacts",
-    "name": "MiNet",
-    "category": "Pocket Edition",
-    "officialLinks": {},
-    "versionRegex": [
-        "\/[a-zA-Z]+-([0-9.]+)\\..*\/",
-        "\/.*(latest).*\/"
-    ]
+  "recommended": true,
+  "abandoned": false,
+  "external": true,
+  "url": "https:\/\/ci.appveyor.com\/project\/NiclasOlofsson\/MiNET\/branch\/master\/artifacts",
+  "name": "MiNet",
+  "category": "Pocket Edition",
+  "officialLinks": {}
 }

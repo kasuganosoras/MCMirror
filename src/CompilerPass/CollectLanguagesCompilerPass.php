@@ -1,8 +1,6 @@
-<?php
-
+<?php declare(strict_types=1);
 
 namespace App\CompilerPass;
-
 
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -11,9 +9,9 @@ use Symfony\Component\Yaml\Yaml;
 
 class CollectLanguagesCompilerPass implements CompilerPassInterface
 {
-
     /**
      * You can modify the container here before it is dumped to PHP code.
+     *
      * @param ContainerBuilder $container
      */
     public function process(ContainerBuilder $container): void
@@ -36,4 +34,3 @@ class CollectLanguagesCompilerPass implements CompilerPassInterface
         $container->setParameter('app.availableLanguages', $languages);
     }
 }
-

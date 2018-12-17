@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace App\Controller;
 
@@ -32,8 +32,9 @@ class ApiController extends AbstractController
 
     /**
      * ApiController constructor.
-     * @param ApplicationService $applicationService
-     * @param BuildsService $buildsService
+     *
+     * @param ApplicationService     $applicationService
+     * @param BuildsService          $buildsService
      * @param DownloadCounterService $downloadCounter
      */
     public function __construct(ApplicationService $applicationService, BuildsService $buildsService, DownloadCounterService $downloadCounter)
@@ -43,9 +44,9 @@ class ApiController extends AbstractController
         $this->downloadCounter = $downloadCounter;
     }
 
-
     /**
      * @Route("/", name="index")
+     *
      * @return Response
      */
     public function indexAction(): Response
@@ -57,8 +58,10 @@ class ApiController extends AbstractController
 
     /**
      * @Route("/list/{option?all}/{fileName}", name="list")
-     * @param string $option
+     *
+     * @param string      $option
      * @param null|string $fileName
+     *
      * @return JsonResponse
      */
     public function listAction(string $option, ?string $fileName = null): JsonResponse
@@ -69,7 +72,7 @@ class ApiController extends AbstractController
             $response = array_map(function (ApplicationInterface $application) {
                 return $application->getName();
             }, $this->applicationService->getApplications());
-        } else if ($this->applicationService->getApplication($option) !== null) {
+        } elseif ($this->applicationService->getApplication($option) !== null) {
             $response = $this->getForApplication($option);
         }
 
@@ -82,8 +85,10 @@ class ApiController extends AbstractController
 
     /**
      * @Route("/file/{applicationName}/{fileName}", name="file")
-     * @param string $applicationName
+     *
+     * @param string      $applicationName
      * @param null|string $fileName
+     *
      * @return JsonResponse
      */
     public function fileAction(string $applicationName, string $fileName): JsonResponse
@@ -92,12 +97,12 @@ class ApiController extends AbstractController
 
         $application = $this->applicationService->getApplication($applicationName);
 
-        if (null === $application) {
+        if ($application === null) {
             throw $this->createNotFoundException(sprintf('Could not find Application %s', $applicationName));
         }
 
         if (!$this->buildsService->doesBuildExist($application, $fileName)) {
-            throw $this->createNotFoundException(sprintf('Could not find File %s for Application %s', $fileName, $fileName));
+            throw $this->createNotFoundException(sprintf('Could not find File %s for Application %s', $fileName, $applicationName));
         }
 
         $build = $this->buildsService->getBuildForApplication($application, $fileName);

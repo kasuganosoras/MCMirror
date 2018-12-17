@@ -6,6 +6,10 @@
     "ext-ctype": "*",
     "ext-iconv": "*",
     "ext-json": "*",
+    "cweagans/composer-patches": "^1.6",
+    "friendsofphp/php-cs-fixer": "^2.13",
+    "php-pm/httpkernel-adapter": "dev-master",
+    "php-pm/php-pm": "^1.0",
     "ramsey/uuid": "^3.8",
     "sensio/framework-extra-bundle": "^5.2",
     "symfony/asset": "*",
@@ -21,7 +25,6 @@
     "symfony/yaml": "*"
   },
   "require-dev": {
-    "friendsofphp/php-cs-fixer": "^2.13",
     "symfony/dotenv": "*"
   },
   "config": {
@@ -67,6 +70,9 @@
     "symfony": {
       "allow-contrib": false,
       "require": "4.1.*"
+    },
+    "enable-patching": true,
+    "patches": {
     }
   }
 }

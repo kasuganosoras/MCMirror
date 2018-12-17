@@ -1,13 +1,9 @@
 {
-    "recommended": true,
-    "abandoned": false,
-    "external": true,
-    "url": "https:\/\/papermc.io\/downloads#Waterfall",
-    "name": "Waterfall",
-    "category": "Proxies",
-    "officialLinks": {},
-    "versionRegex": [
-        "\/[a-zA-Z]+-([0-9.]+)\\..*\/",
-        "\/.*(latest).*\/"
-    ]
+  "recommended": true,
+  "abandoned": false,
+  "external": true,
+  "url": "https:\/\/papermc.io\/downloads#Waterfall",
+  "name": "Waterfall",
+  "category": "Proxies",
+  "officialLinks": {}
 }

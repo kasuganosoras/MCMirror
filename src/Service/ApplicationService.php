@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace App\Service;
 
@@ -19,7 +19,7 @@ class ApplicationService
      * ApplicationService constructor.
      *
      * @param iterable $applications
-     * @param array $categories
+     * @param array    $categories
      */
     public function __construct(iterable $applications, array $categories)
     {
@@ -64,22 +64,21 @@ class ApplicationService
 
         foreach ($orderedApplications as $categoryName => &$applications) {
             usort($applications, function (ApplicationInterface $applicationA, ApplicationInterface $applicationB) {
-
                 $i = 0;
                 if ($applicationA->isRecommended() && !$applicationB->isRecommended()) {
-                    $i--;
+                    --$i;
                 }
 
                 if (!$applicationA->isRecommended() && $applicationB->isRecommended()) {
-                    $i++;
+                    ++$i;
                 }
 
                 if (!$applicationA->isAbandoned() && $applicationB->isAbandoned()) {
-                    $i--;
+                    --$i;
                 }
 
                 if ($applicationA->isAbandoned() && !$applicationB->isAbandoned()) {
-                    $i++;
+                    ++$i;
                 }
 
                 return $i;

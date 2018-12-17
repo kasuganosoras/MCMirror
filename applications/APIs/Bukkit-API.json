@@ -1,9 +1,9 @@
 {
   "recommended": false,
-  "abandoned": true,
+  "abandoned": false,
   "external": false,
   "url": null,
-  "name": "Torch",
-  "category": "Multi-Threaded",
+  "name": "Bukkit-API",
+  "category": "APIs",
   "officialLinks": {}
 }

@@ -1,9 +1,9 @@
 {
   "recommended": false,
-  "abandoned": true,
+  "abandoned": false,
   "external": false,
   "url": null,
-  "name": "Torch",
-  "category": "Multi-Threaded",
+  "name": "Spigot-API",
+  "category": "APIs",
   "officialLinks": {}
 }

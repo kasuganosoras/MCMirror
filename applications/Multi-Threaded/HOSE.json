@@ -5,9 +5,5 @@
   "url": null,
   "name": "HOSE",
   "category": "Multi-Threaded",
-  "officialLinks": {},
-  "versionRegex": [
-    "/[a-zA-Z]+-([0-9.]+).*/",
-    "/.*(latest).*/"
-  ]
+  "officialLinks": {}
 }

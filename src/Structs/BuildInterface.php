@@ -1,8 +1,8 @@
-<?php
-
+<?php declare(strict_types=1);
 
 namespace App\Structs;
 
+use Symfony\Component\Finder\SplFileInfo;
 
 interface BuildInterface
 {
@@ -16,6 +16,10 @@ interface BuildInterface
 
     public function getMinecraftVersion(): string;
 
+    public function getBuildHash(): string;
+
+    public function getBuildDate(): \DateTime;
+
     public function getDirectLink(): string;
 
     public function getGrabLink(): string;
@@ -25,4 +29,6 @@ interface BuildInterface
     public function getApiAnswer(): array;
 
     public function getDownloadCounter(): int;
+
+    public function getFile(): SplFileInfo;
 }

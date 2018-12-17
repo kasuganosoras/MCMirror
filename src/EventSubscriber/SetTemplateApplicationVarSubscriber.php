@@ -1,10 +1,9 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace App\EventSubscriber;
 
 use App\Service\ApplicationService;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symfony\Component\VarDumper\VarDumper;
 use Twig\Environment;
 
 class SetTemplateApplicationVarSubscriber implements EventSubscriberInterface

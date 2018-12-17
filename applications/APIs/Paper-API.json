@@ -1,9 +1,9 @@
 {
-  "recommended": false,
+  "recommended": true,
   "abandoned": false,
   "external": false,
   "url": null,
-  "name": "Spigot",
-  "category": "Vanilla",
+  "name": "Paper-API",
+  "category": "APIs",
   "officialLinks": {}
 }

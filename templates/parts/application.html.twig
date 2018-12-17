@@ -7,11 +7,11 @@
         {% set url = url('application_overview', {'applicationName': application.name}) %}
     {% endif %}
 
-    <a class="panel-block" href="{{ url }}">{{ application.name }}
+    <a class="application panel-block" href="{{ url }}">{{ application.name }}
         <span class="is-pulled-right">
 
             {% if application.isRecommended %}
-                <span class="tag is-success "><i class="fas fa-star"></i></span>
+                <span class="tag is-success" rel="recommended"><i class="fas fa-star"></i></span>
             {% endif %}
 
             {% if application.isAbandoned %}

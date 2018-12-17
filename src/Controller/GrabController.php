@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace App\Controller;
 
@@ -27,8 +27,8 @@ class GrabController extends AbstractController
     /**
      * DownloadsController constructor.
      *
-     * @param ApplicationService $applicationService
-     * @param BuildsService $buildsService
+     * @param ApplicationService     $applicationService
+     * @param BuildsService          $buildsService
      * @param DownloadCounterService $downloadCounter
      */
     public function __construct(ApplicationService $applicationService, BuildsService $buildsService, DownloadCounterService $downloadCounter)
@@ -50,7 +50,7 @@ class GrabController extends AbstractController
     {
         $application = $this->applicationService->getApplication($applicationName);
 
-        if (null === $application) {
+        if ($application === null) {
             throw $this->createNotFoundException(sprintf('Could not find Application %s', $applicationName));
         }
 
@@ -63,9 +63,10 @@ class GrabController extends AbstractController
         $this->downloadCounter->increaseCounter($application, $build);
 
         return $this->render('grab/index.html.twig', [
-            'title' => 'Download ' . $fileName,
+            'title'       => 'Download ' . $fileName,
             'application' => $application,
-            'filename' => $fileName,
+            'build'       => $build,
+            'filename'    => $fileName,
         ]);
     }
 }
