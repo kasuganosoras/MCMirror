@@ -1,4 +1,3 @@
-
 function toggleModalClasses(event) {
     var modalId = event.currentTarget.dataset.modalId;
     var modal = $(modalId);
@@ -61,3 +60,5 @@ $(document).ready(function () {
         }
     });
 });
+
+new ClipboardJS('button');
