@@ -1,6 +1,6 @@
 {
   "recommended": false,
-  "abandoned": false,
+  "abandoned": true,
   "external": true,
   "url": "https://github.com/Luohuayu/CatServer",
   "name": "CatServer",
