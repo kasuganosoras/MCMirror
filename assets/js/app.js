@@ -70,8 +70,10 @@ $(document).ready(function () {
     });
 
     if (screen.width < 1024) {
-        var d = document.querySelector('.navbar-dropdown');
-        d.parentElement.addEventListener('click', function(event) {
+        const d = document.querySelector('.navbar-dropdown');
+
+        d.style.display = "none";
+        d.parentElement.addEventListener('click', (event) => {
             event.stopPropagation();
             if (d.style.display === "none") {
                 d.style.display = "block";
