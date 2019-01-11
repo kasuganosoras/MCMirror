@@ -1,0 +1,40 @@
+'File Download': 'Скачать файл'
+Filters: Фильтры
+'Archive of %applicationName% Builds': 'Архив %applicationName% прошлых версий'
+'Official Links': 'Оригинальные ссылки'
+Name: Название
+Version: Версия
+Size: Размер
+Date: Дата
+Download: Скачать
+Abandoned: Заброшен
+External: Внешний
+'Outgoing link to an external download location.': 'Исходящая ссылка на внешний каталог загрузки.'
+'Project was abandoned by its developers.': 'Проект был заброшен его разработчиками.'
+Recommended: Рекомендуем
+'continuation of Yives Mirror': 'продолжение Yives Mirror'
+'Minecraft Server Software File Mirror': 'Minecraft Server Software File Mirror'
+Home: Домой
+Downloads: Загрузки
+APIs: APIs
+Discord: Discord
+GitHub: GitHub
+'%websiteName% is not affliated with Mojang nor any of the software hosted here.': '%websiteName% не связан ни с Mojang, ни с программным обеспечением, размещенным здесь.'
+List: Список
+All: Все
+Format: Фильтр
+'Example URL': 'Пример URL'
+Info: Информация
+'This URL is just for listing the current options.': 'Этот URL предназначен только для перечисления текущих параметров.'
+'Example usage': 'Пример использования'
+'Real world usage for grabbing the list of files for %applicationName%.': 'Реальное использование мира для получения списка файлов для %applicationName%.'
+File: Файл
+'Real world usage for requesting information about %buildName%.': 'Использование в реальном времени для запроса информации о %buildName%.'
+'Vanilla': 'Vanilla'
+'Forge': 'Forge'
+'Proxies': 'Прокси'
+'Pocket Edition': 'Pocket Edition'
+'Multi-Threaded': 'Мульти-поточные'
+'Mods': 'Моды'
+'Alternative': 'Альтернатива'
+languageName: Russian
