@@ -76,6 +76,9 @@
     },
     "enable-patching": true,
     "patches": {
+      "php-pm/httpkernel-adapter": {
+        "Reset Webpack Encore Filelist": "https://patch-diff.githubusercontent.com/raw/php-pm/php-pm-httpkernel/pull/151.patch"
+      }
     }
   }
 }
