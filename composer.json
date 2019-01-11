@@ -1,13 +1,13 @@
 {
+  "name": "MCMirror",
   "type": "project",
-  "license": "proprietary",
+  "license": "MIT",
   "require": {
     "php": "^7.1.3",
     "ext-ctype": "*",
     "ext-iconv": "*",
     "ext-json": "*",
     "cweagans/composer-patches": "^1.6",
-    "friendsofphp/php-cs-fixer": "^2.13",
     "php-pm/httpkernel-adapter": "dev-master",
     "php-pm/php-pm": "^1.0",
     "ramsey/uuid": "^3.8",
@@ -17,15 +17,18 @@
     "symfony/finder": "*",
     "symfony/flex": "^1.1",
     "symfony/framework-bundle": "*",
-    "symfony/maker-bundle": "^1.9",
     "symfony/profiler-pack": "^1.0",
     "symfony/translation": "*",
     "symfony/twig-bundle": "*",
     "symfony/web-server-bundle": "*",
+    "symfony/webpack-encore-bundle": "^1.0",
     "symfony/yaml": "*"
   },
   "require-dev": {
-    "symfony/dotenv": "*"
+    "roave/security-advisories": "dev-master",
+    "symfony/maker-bundle": "^1.9",
+    "symfony/dotenv": "*",
+    "friendsofphp/php-cs-fixer": "^2.13"
   },
   "config": {
     "preferred-install": {

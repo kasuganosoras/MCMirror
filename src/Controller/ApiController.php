@@ -60,7 +60,7 @@ class ApiController extends AbstractController
      * @Route("/list/{option?all}/{fileName}", name="list")
      *
      * @param string      $option
-     * @param null|string $fileName
+     * @param string|null $fileName
      *
      * @return JsonResponse
      */
@@ -87,7 +87,7 @@ class ApiController extends AbstractController
      * @Route("/file/{applicationName}/{fileName}", name="file")
      *
      * @param string      $applicationName
-     * @param null|string $fileName
+     * @param string|null $fileName
      *
      * @return JsonResponse
      */

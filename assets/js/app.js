@@ -1,3 +1,12 @@
+require('bulma');
+require('animate.css');
+require('@fortawesome/fontawesome-free/css/all.min.css');
+require('@fortawesome/fontawesome-free/js/all.js');
+require('../css/app.css');
+
+const $ = require('jquery');
+const ClipboardJS = require('clipboard.js');
+
 function toggleModalClasses(event) {
     var modalId = event.currentTarget.dataset.modalId;
     var modal = $(modalId);

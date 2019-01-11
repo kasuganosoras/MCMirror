@@ -11,7 +11,7 @@
         <meta property="og:title" content="{{ title|trans }}"/>
         <meta property="og:url" content="{{ app.request.uri }}"/>
         <meta property="og:type" content="website"/>
-        <meta property="og:image" content="{{ asset('dist/icon.png') }}">
+        <meta property="og:image" content="{{ asset('build/static/icon.png') }}">
         {% block additional_meta %}
             <meta property="og:description" content="Downloads for server software to run Minecraft servers." />
             <meta name="description" content="Downloads for server software to run Minecraft servers.">
@@ -19,14 +19,11 @@
         {% endblock %}
     {% endblock %}
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css" integrity="sha256-2pUeJf+y0ltRPSbKOeJh09ipQFYxUdct5nTY6GAXswA=" crossorigin="anonymous" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.css" integrity="sha256-gVCm5mRCmW9kVgsSjQ7/5TLtXqvfCoxhdsjE6O1QLm8=" crossorigin="anonymous" />
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
-    <link rel="stylesheet" href="{{ asset('dist/style.css') }}"/>
+    {{ encore_entry_link_tags('app') }}
 </head>
 <body>
 
-<section class="hero is-primary" style="background-repeat: no-repeat;background-size: cover;background: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url({{ asset('/dist/header.jpg') }});background-position: center;">
+<section class="hero is-primary" style="background-repeat: no-repeat;background-size: cover;background: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url({{ asset('build/static/header.jpg') }});background-position: center;">
     <div class="hero-body">
         <div class="container has-text-centered">
             <h1 class="title">{{ env('WEBSITE_NAME')|trans }}</h1>
@@ -112,8 +109,6 @@
         </nav>
     </div>
 </div>
-<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js" crossorigin="anonymous"></script>
-<script src="{{ asset('/dist/script.js') }}"></script>
+{{ encore_entry_script_tags('app') }}
 </body>
 </html>

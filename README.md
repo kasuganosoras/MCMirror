@@ -9,11 +9,24 @@ Discord: https://discord.gg/dge38Gm
 ## Installation
 [![PPM Compatible](https://raw.githubusercontent.com/php-pm/ppm-badge/master/ppm-badge.png)](https://github.com/php-pm/php-pm)
 
+You need Yarn:
+https://yarnpkg.com/lang/en/docs/install/
+
+and Composer:
 ```
 sudo apt install composer
-apt-get install php7.2 php7.2-cli php7.2-xml php7.2-cgi
-composer install
+apt-get install php7.3 php7.3-cli php7.3-xml php7.3-cgi 
 ```
+
+then you can pull the dependencies with:
+```
+composer install
+yarn install
+```
+
+After that you need to build the Frontend Files:
+
+Unminified `yarn encore dev` or Minified `yarn encore production`
 
 ## Start
 To start MCMirror locally (after you finished installation) run:

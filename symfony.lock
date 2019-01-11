@@ -122,6 +122,9 @@
     "ringcentral/psr7": {
         "version": "1.2.2"
     },
+    "roave/security-advisories": {
+        "version": "dev-master"
+    },
     "sensio/framework-extra-bundle": {
         "version": "5.2",
         "recipe": {
@@ -148,6 +151,9 @@
             "version": "3.3",
             "ref": "b5026d7ffdb43b4d66f4cc091b1e6f94e6023986"
         }
+    },
+    "symfony/contracts": {
+        "version": "v1.0.2"
     },
     "symfony/debug": {
         "version": "v4.1.7"
@@ -251,6 +257,9 @@
     "symfony/var-dumper": {
         "version": "v4.1.7"
     },
+    "symfony/var-exporter": {
+        "version": "v4.2.2"
+    },
     "symfony/web-profiler-bundle": {
         "version": "3.3",
         "recipe": {
@@ -267,6 +276,15 @@
             "branch": "master",
             "version": "3.3",
             "ref": "dae9b39fd6717970be7601101ce5aa960bf53d9a"
+        }
+    },
+    "symfony/webpack-encore-bundle": {
+        "version": "1.0",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "1.0",
+            "ref": "248c29c070dcd79e8333c676b0c5e284e3b365b5"
         }
     },
     "symfony/yaml": {
