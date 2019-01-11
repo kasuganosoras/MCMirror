@@ -68,6 +68,18 @@ $(document).ready(function () {
             $('.application').show();
         }
     });
+
+    if (screen.width < 1024) {
+        var d = document.querySelector('.navbar-dropdown');
+        d.parentElement.addEventListener('click', function(event) {
+            event.stopPropagation();
+            if (d.style.display === "none") {
+                d.style.display = "block";
+            } else {
+                d.style.display = "none";
+            }
+        });
+    }
 });
 
 new ClipboardJS('button');
