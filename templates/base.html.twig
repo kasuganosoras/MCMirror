@@ -43,6 +43,7 @@
                     <a data-modal-id="#downloads-modal" class="navbar-item open-modal">{% trans %}Downloads{% endtrans %}</a>
                     <a class="navbar-item {% if app.request.attributes.get('_route') == 'api_index' %}is-active{% endif %}"
                            href="{{ url('api_index') }}">{% trans %}APIs{% endtrans %}</a>
+                    <a class="navbar-item" href="https://archive.mcmirror.io/">{% trans %}Archive{% endtrans %}</a>
                 </div>
                 <div class="navbar-end">
                     <div class="navbar-item has-dropdown is-hoverable">
