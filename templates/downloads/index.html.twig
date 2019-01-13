@@ -86,6 +86,11 @@
                             </tr>
                         {% endfor %}
                     </table>
+                    {% if builds|length == 0 %}
+                        <br>
+                        <p class="subtitle">There are no Builds here. They are maybe in <a href="https://archive.mcmirror.io/">another Castle</a></p>
+                        <br>
+                    {% endif %}
                 </div>
             </div>
         </div>
