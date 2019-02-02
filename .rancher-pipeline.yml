@@ -6,5 +6,5 @@ stages:
       buildContext: .
       tag: connectedgames/mcmirror:latest
       pushRemote: true
-      registry: 127.0.0.1:34361
+      registry: index.docker.io
 timeout: 60
