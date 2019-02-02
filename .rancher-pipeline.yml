@@ -4,5 +4,6 @@ stages:
   - publishImageConfig:
       dockerfilePath: ./Dockerfile
       buildContext: .
-      tag: ConnectedGames/MCMirror:latest
+      tag: connectedgames/mcmirror:latest
+      registry: 127.0.0.1:34361
 timeout: 60
