@@ -53,6 +53,9 @@
             "ref": "81dee417d2cc60cd1c9d6208dff2ec22a1103e93"
         }
     },
+    "guzzlehttp/psr7": {
+        "version": "1.5.2"
+    },
     "http-interop/http-middleware": {
         "version": "0.5.0"
     },
@@ -85,6 +88,9 @@
     },
     "psr/simple-cache": {
         "version": "1.0.1"
+    },
+    "ralouphie/getallheaders": {
+        "version": "2.0.5"
     },
     "ramsey/uuid": {
         "version": "3.8.0"
