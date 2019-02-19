@@ -1,3 +1,11 @@
+require('bulma');
+require('animate.css');
+require('@fortawesome/fontawesome-free/css/all.min.css');
+require('@fortawesome/fontawesome-free/js/all.js');
+require('../css/app.css');
+
+const $ = require('jquery');
+const ClipboardJS = require('clipboard.js');
 
 function toggleModalClasses(event) {
     var modalId = event.currentTarget.dataset.modalId;
@@ -60,4 +68,20 @@ $(document).ready(function () {
             $('.application').show();
         }
     });
+
+    if (screen.width < 1024) {
+        const d = document.querySelector('.navbar-dropdown');
+
+        d.style.display = "none";
+        d.parentElement.addEventListener('click', (event) => {
+            event.stopPropagation();
+            if (d.style.display === "none") {
+                d.style.display = "block";
+            } else {
+                d.style.display = "none";
+            }
+        });
+    }
 });
+
+new ClipboardJS('button');

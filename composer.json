@@ -1,31 +1,34 @@
 {
+  "name": "MCMirror",
   "type": "project",
-  "license": "proprietary",
+  "license": "MIT",
   "require": {
-    "php": "^7.1.3",
+    "php": "^7.3",
     "ext-ctype": "*",
     "ext-iconv": "*",
     "ext-json": "*",
-    "cweagans/composer-patches": "^1.6",
-    "friendsofphp/php-cs-fixer": "^2.13",
+    "cweagans/composer-patches": "*",
     "php-pm/httpkernel-adapter": "dev-master",
-    "php-pm/php-pm": "^1.0",
-    "ramsey/uuid": "^3.8",
-    "sensio/framework-extra-bundle": "^5.2",
+    "php-pm/php-pm": "*",
+    "ramsey/uuid": "*",
+    "sensio/framework-extra-bundle": "*",
     "symfony/asset": "*",
     "symfony/console": "*",
     "symfony/finder": "*",
-    "symfony/flex": "^1.1",
+    "symfony/flex": "*",
     "symfony/framework-bundle": "*",
-    "symfony/maker-bundle": "^1.9",
-    "symfony/profiler-pack": "^1.0",
+    "symfony/profiler-pack": "*",
     "symfony/translation": "*",
     "symfony/twig-bundle": "*",
     "symfony/web-server-bundle": "*",
+    "symfony/webpack-encore-bundle": "*",
     "symfony/yaml": "*"
   },
   "require-dev": {
-    "symfony/dotenv": "*"
+    "roave/security-advisories": "dev-master",
+    "symfony/maker-bundle": "*",
+    "symfony/dotenv": "*",
+    "friendsofphp/php-cs-fixer": "*"
   },
   "config": {
     "preferred-install": {
@@ -47,6 +50,7 @@
     "paragonie/random_compat": "2.*",
     "symfony/polyfill-ctype": "*",
     "symfony/polyfill-iconv": "*",
+    "symfony/polyfill-php72": "*",
     "symfony/polyfill-php71": "*",
     "symfony/polyfill-php70": "*",
     "symfony/polyfill-php56": "*"
@@ -68,11 +72,13 @@
   },
   "extra": {
     "symfony": {
-      "allow-contrib": false,
-      "require": "4.1.*"
+      "allow-contrib": false
     },
     "enable-patching": true,
     "patches": {
+      "php-pm/httpkernel-adapter": {
+        "Fix Webpack Encore Bundle EntrypointLookup reset": "https://patch-diff.githubusercontent.com/raw/php-pm/php-pm-httpkernel/pull/153.patch"
+      }
     }
   }
 }

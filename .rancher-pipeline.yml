@@ -1,0 +1,10 @@
+stages:
+- name: Build
+  steps:
+  - publishImageConfig:
+      dockerfilePath: ./Dockerfile
+      buildContext: .
+      tag: connectedgames/mcmirror:latest
+      pushRemote: true
+      registry: index.docker.io
+timeout: 60

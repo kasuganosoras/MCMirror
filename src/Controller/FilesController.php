@@ -9,7 +9,6 @@ use App\Structs\LatestBuild;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\VarDumper\VarDumper;
 
 class FilesController extends AbstractController
 {
@@ -65,7 +64,7 @@ class FilesController extends AbstractController
         if ($build instanceof LatestBuild) {
             return $this->redirectToRoute('files', [
                 'applicationName' => $applicationName,
-                'fileName' => $build->getFile()->getFilename()
+                'fileName'        => $build->getFile()->getFilename()
             ]);
         }
 

@@ -21,7 +21,7 @@
 }
 
 .navbar-item.has-dropdown.is-active .navbar-link, .navbar-item.has-dropdown:hover .navbar-link {
-        background-color: rgba(10,10,10,.1);
+    background-color: rgba(10,10,10,.1);
 }
 
 /* Navbar active item */
@@ -42,7 +42,7 @@
 
 /* Remove the dropdown menu top border and change text color */
 .navbar-dropdown {
-    border-top: 0px;
+    border-top: 0;
     color: #363636;
 }
 

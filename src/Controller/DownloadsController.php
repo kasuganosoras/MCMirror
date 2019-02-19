@@ -59,7 +59,7 @@ class DownloadsController extends AbstractController
         $builds = $this->buildsService->getBuildsForApplication($application);
 
         usort($builds, function (BuildInterface $a, BuildInterface $b) {
-            $i = strcmp((string)$b->getEpochDate(), (string)$a->getEpochDate());
+            $i = strcmp((string) $b->getEpochDate(), (string) $a->getEpochDate());
 
             if (strpos($b->getFileName(), '-latest.jar') !== false) {
                 ++$i;
