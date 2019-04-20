@@ -60,6 +60,12 @@
                             {% endfor %}
                         </div>
                     </div>
+                    <a class="navbar-item" href="{{ env('PATREON_LINK') }}">
+                        <span class="icon">
+                            <i class="fab fa-patreon"></i>
+                        </span>
+                        <span>{% trans %}Patreon{% endtrans %}</span>
+                    </a>
                     <a class="navbar-item" href="{{ env('DISCORD_LINK') }}">
                         <span class="icon">
                             <i class="fab fa-discord"></i>
